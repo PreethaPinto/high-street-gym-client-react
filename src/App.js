@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import RootLayout from './pages/Root';
+import AboutPage from './pages/About';
+import BlogPage from './pages/Blog';
+import ClassesPage from './pages/Classes';
+import HomePage from './pages/Home';
+import LoginPage from './pages/Login';
+import SignupPage from './pages/Signup';
+import TrainersPage from './pages/Trainers';
+import ErrorPage from './pages/Error';
+
+const App = () => {
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <RootLayout />,
+      errorElement: <ErrorPage />,
+      children: [
+        { path: '/', element: <HomePage /> },
+        { path: '/about', element: <AboutPage /> },
+        { path: '/blog', element: <BlogPage /> },
+        { path: '/classes', element: <ClassesPage /> },
+        { path: '/login', element: <LoginPage /> },
+        { path: '/signup', element: <SignupPage /> },
+        { path: '/trainers', element: <TrainersPage /> },
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router}></RouterProvider>;
+};
 
 export default App;

@@ -1,0 +1,43 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: #e7e7e7;
+  padding: 0 50px;
+}
+
+.header .logo {
+  font-weight: 700;
+  color: orangered;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.menu ul {
+  display: flex;
+}
+
+.menu ul li {
+  list-style: none;
+  padding: 10px;
+}
+
+.list a {
+  text-decoration: none;
+  color: #e7e7e7;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.list a:hover,
+.list a.active {
+  color: orangered;
+}
+
+.btn-header {
+  color: #e7e7e7;
+  background-color: orangered;
+  padding: 10px;
+  cursor: pointer;
+}
