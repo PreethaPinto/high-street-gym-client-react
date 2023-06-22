@@ -1,5 +1,7 @@
+import classes from './Home.module.css';
+
 const HomePage = () => {
-  return <h1>Home Page</h1>;
+  return <div className={classes['home-wrapper']}>Home</div>;
 };
 
 export default HomePage;

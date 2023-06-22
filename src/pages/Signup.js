@@ -47,6 +47,7 @@ const SignupPage = () => {
           Sign Up
         </button>
       </form>
+      <p>Already a member? </p>
     </div>
   );
 };
