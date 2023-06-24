@@ -19,11 +19,11 @@ const App = () => {
       element: <RootLayout />,
       errorElement: <ErrorPage />,
       children: [
-        { path: '', element: <HomePage /> },
+        { index: true, element: <HomePage /> },
         { path: 'about', element: <AboutPage /> },
         { path: 'blog', element: <BlogPage /> },
         { path: 'blog/:blogId', element: <BlogDetailPage /> },
-        { path: 'classes', element: <ClassesPage /> },
+        { path: 'classes', element: <ClassesPage />, loader: '' },
         { path: 'login', element: <LoginPage /> },
         { path: 'signup', element: <SignupPage /> },
         { path: 'trainers', element: <TrainersPage /> },

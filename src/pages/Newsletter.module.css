@@ -1,0 +1,23 @@
+.newsletter {
+  display: flex;
+  flex-direction: column;
+  background-color: #ff4500;
+  height: 150px;
+  width: 30%;
+  margin: auto;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.newsletter label {
+  margin: 20px;
+  font-size: 1.8rem;
+}
+
+.newsletter input {
+  width: 400px;
+  margin-right: 20px;
+}

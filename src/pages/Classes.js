@@ -3,37 +3,40 @@ import { useEffect, useState } from 'react';
 import classes from './Classes.module.css';
 
 const ClassesPage = (props) => {
-  const [classes, setClasses] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [fetchedClasses, setFetchedClasses] = useState([]);
 
   useEffect(() => {
     const fetchClasses = async () => {
-      const response = await fetch('http://localhost:8080/classes');
+      setIsLoading(true);
+      const response = await fetch('http://localhost:8080/fetchedClasses');
 
       if (!response.ok) {
         throw new Error('Something went wrong');
+      } else {
+        const responseData = await response.json();
+
+        const loadedClasses = [];
+
+        for (const key in responseData) {
+          loadedClasses.push({
+            classesId: key,
+            fetchedClasses: responseData[key].fetchedClasses,
+            day: responseData[key].day,
+            time: responseData[key].time,
+          });
+        }
+        setFetchedClasses(loadedClasses);
+        console.log(loadedClasses);
       }
-
-      const responseData = await response.json();
-
-      const loadedClasses = [];
-
-      for (const key in responseData) {
-        loadedClasses.push({
-          classesId: key,
-          classes: responseData[key].classes,
-          day: responseData[key].day,
-          time: responseData[key].time,
-        });
-      }
-      setClasses(loadedClasses);
-      console.log(loadedClasses);
+      setIsLoading(false);
     };
     fetchClasses();
   }, []);
 
-  const classesList = classes.map((item) => (
+  const classesList = fetchedClasses.map((item) => (
     <ul key={item.classesId}>
-      <li>{item.classes}</li>
+      <li>{item.fetchedClasses}</li>
       <li>{item.day}</li>
       <li>{item.time}</li>
     </ul>
@@ -43,3 +46,24 @@ const ClassesPage = (props) => {
 };
 
 export default ClassesPage;
+
+export const classLoader = async () => {
+  const response = await fetch('http://localhost:8080/fetchedClasses');
+
+  if (!response.ok) {
+    throw new Error('Something went wrong');
+  }
+
+  const responseData = await response.json();
+
+  const loadedClasses = [];
+
+  for (const key in responseData) {
+    loadedClasses.push({
+      classesId: key,
+      fetchedClasses: responseData[key].fetchedClasses,
+      day: responseData[key].day,
+      time: responseData[key].time,
+    });
+  }
+};

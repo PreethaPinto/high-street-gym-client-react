@@ -13,8 +13,13 @@ const LoginPage = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    setEnteredUsername(event.target.value);
 
-    console.log(event.target.value);
+    console.log(setEnteredUsername);
+  };
+
+  const inputChangeHandler = (input, value) => {
+    console.log(input, value);
   };
 
   return (
@@ -32,6 +37,9 @@ const LoginPage = (props) => {
             id='username'
             ref={nameInputRef}
             placeholder='Username'
+            onChange={(event) =>
+              inputChangeHandler('username', event.target.value)
+            }
             className={classes['login-input']}
           />
         </div>
@@ -42,6 +50,9 @@ const LoginPage = (props) => {
             id='password'
             ref={passwordInputRef}
             placeholder='Password'
+            onChange={(event) =>
+              inputChangeHandler('password', event.target.value)
+            }
             className={classes['login-input']}
           />
         </div>

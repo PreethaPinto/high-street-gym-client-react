@@ -25,7 +25,7 @@ const BlogPage = () => {
         <div>
           <ul>
             <li key={blog.blogId}>
-              <Link to={blog.blogId}>{blog.blogName}</Link>
+              <Link to={`blog${blog.blogId}`}>{blog.blogName}</Link>
             </li>
           </ul>
           <p>{blog.blogContent}</p>
