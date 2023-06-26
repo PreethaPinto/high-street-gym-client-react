@@ -14,12 +14,14 @@ const LoginPage = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     setEnteredUsername(event.target.value);
-
-    console.log(setEnteredUsername);
   };
 
   const inputChangeHandler = (input, value) => {
-    console.log(input, value);
+    if (input === 'username') {
+      setEnteredUsername(value);
+    } else if (input === 'password') {
+      setEnteredPassword(value);
+    }
   };
 
   return (
@@ -36,6 +38,7 @@ const LoginPage = (props) => {
             type='text'
             id='username'
             ref={nameInputRef}
+            value={enteredUsername}
             placeholder='Username'
             onChange={(event) =>
               inputChangeHandler('username', event.target.value)
