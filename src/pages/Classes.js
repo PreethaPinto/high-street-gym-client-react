@@ -3,12 +3,15 @@ import { useEffect, useState } from 'react';
 import classes from './Classes.module.css';
 
 const ClassesPage = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [fetchedClasses, setFetchedClasses] = useState([]);
+  const [httpError, setHttpError] = useState(null);
 
   useEffect(() => {
+    setIsLoading(true);
+    setHttpError(false);
+
     const fetchClasses = async () => {
-      setIsLoading(true);
       const response = await fetch('http://localhost:8080/fetchedClasses');
 
       if (!response.ok) {
@@ -31,8 +34,28 @@ const ClassesPage = (props) => {
       }
       setIsLoading(false);
     };
-    fetchClasses();
+
+    fetchClasses().catch((error) => {
+      setIsLoading(false);
+      setHttpError(error.message);
+    });
   }, []);
+
+  if (isLoading) {
+    return (
+      <section className={classes.classesLoading}>
+        <p>Loading...</p>
+      </section>
+    );
+  }
+
+  if (httpError) {
+    return (
+      <section className={classes.classesError}>
+        <p>httpError</p>
+      </section>
+    );
+  }
 
   const classesList = fetchedClasses.map((item) => (
     <ul key={item.classesId}>

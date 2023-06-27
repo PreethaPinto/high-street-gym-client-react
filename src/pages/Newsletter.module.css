@@ -6,10 +6,10 @@
   width: 30%;
   margin: auto;
   border-radius: 20px;
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 50px; */
 }
 
 .newsletter label {

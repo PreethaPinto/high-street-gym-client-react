@@ -1,13 +1,10 @@
 import { Form, Link } from 'react-router-dom';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 import classes from './Login.module.css';
 
 const LoginPage = (props) => {
-  const nameInputRef = useRef();
-  const passwordInputRef = useRef();
-
   const [enteredUsername, setEnteredUsername] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
 
@@ -37,7 +34,6 @@ const LoginPage = (props) => {
           <input
             type='text'
             id='username'
-            ref={nameInputRef}
             value={enteredUsername}
             placeholder='Username'
             onChange={(event) =>
@@ -51,7 +47,6 @@ const LoginPage = (props) => {
           <input
             type='text'
             id='password'
-            ref={passwordInputRef}
             placeholder='Password'
             onChange={(event) =>
               inputChangeHandler('password', event.target.value)

@@ -16,39 +16,67 @@ const SignupPage = () => {
     event.preventDefault();
 
     const signupData = enteredInput;
-    console.log(signupData);
+    const {
+      enteredFirstName: firstName,
+      enteredLastName: lastName,
+      enteredPhone: phone,
+      enteredEmail: email,
+      enteredUsername: username,
+      enteredPassword: password,
+    } = signupData;
+
+    setEnteredInput({
+      enteredFirstName: '',
+      enteredLastName: '',
+      enteredPhone: 0,
+      enteredEmail: '',
+      enteredUsername: '',
+      enteredPassword: '',
+    });
   };
 
   const inputChangeHandler = (input, value) => {
     if (input === 'first-name') {
-      setEnteredInput({
-        ...enteredInput,
-        enteredFirstName: value,
+      setEnteredInput((prevState) => {
+        return {
+          ...prevState,
+          enteredFirstName: value,
+        };
       });
     } else if (input === 'last-name') {
-      setEnteredInput({
-        ...enteredInput,
-        enteredLastName: value,
+      setEnteredInput((prevState) => {
+        return {
+          ...prevState,
+          enteredLastName: value,
+        };
       });
     } else if (input === 'phone') {
-      setEnteredInput({
-        ...enteredInput,
-        enteredPhone: value,
+      setEnteredInput((prevState) => {
+        return {
+          ...prevState,
+          enteredPhone: value,
+        };
       });
     } else if (input === 'email') {
-      setEnteredInput({
-        ...enteredInput,
-        enteredEmail: value,
+      setEnteredInput((prevState) => {
+        return {
+          ...prevState,
+          enteredEmail: value,
+        };
       });
     } else if (input === 'username') {
-      setEnteredInput({
-        ...enteredInput,
-        enteredUsername: value,
+      setEnteredInput((prevState) => {
+        return {
+          ...prevState,
+          enteredUsername: value,
+        };
       });
     } else if (input === 'password') {
-      setEnteredInput({
-        ...enteredInput,
-        enteredPassword: value,
+      setEnteredInput((prevState) => {
+        return {
+          ...prevState,
+          enteredPassword: value,
+        };
       });
     }
   };
@@ -62,6 +90,7 @@ const SignupPage = () => {
             onChange={(event) =>
               inputChangeHandler('first-name', event.target.value)
             }
+            value={enteredInput.enteredFirstName}
             id='first-name'
             type='text'
             placeholder='First Name'
@@ -71,6 +100,7 @@ const SignupPage = () => {
             onChange={(event) =>
               inputChangeHandler('last-name', event.target.value)
             }
+            value={enteredInput.enteredLastName}
             id='last-name'
             type='text'
             placeholder='Last Name'
@@ -82,6 +112,7 @@ const SignupPage = () => {
             onChange={(event) =>
               inputChangeHandler('phone', event.target.value)
             }
+            value={enteredInput.enteredPhone}
             id='phone'
             type='number'
             placeholder='Phone'
@@ -91,6 +122,7 @@ const SignupPage = () => {
             onChange={(event) =>
               inputChangeHandler('email', event.target.value)
             }
+            value={enteredInput.enteredEmail}
             id='email'
             type='text'
             placeholder='Email'
@@ -102,6 +134,7 @@ const SignupPage = () => {
             onChange={(event) =>
               inputChangeHandler('username', event.target.value)
             }
+            value={enteredInput.enteredUsername}
             id='username'
             type='text'
             placeholder='Username'
@@ -111,6 +144,7 @@ const SignupPage = () => {
             onChange={(event) =>
               inputChangeHandler('password', event.target.value)
             }
+            value={enteredInput.enteredPassword}
             id='password'
             type='text'
             placeholder='Password'
