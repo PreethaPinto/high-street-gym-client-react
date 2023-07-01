@@ -1,67 +1,100 @@
-import { Form, Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import classes from './Login.module.css';
 
 const LoginPage = (props) => {
-  const [enteredUsername, setEnteredUsername] = useState('');
-  const [enteredPassword, setEnteredPassword] = useState('');
+  const userRef = useRef();
+
+  const [formValues, setFormValues] = useState({ username: '', password: '' });
+  const [formErrors, setFormErrors] = useState({});
+
+  //const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
 
   const submitHandler = (event) => {
     event.preventDefault();
-    setEnteredUsername(event.target.value);
+    setFormErrors(validateForm(formValues));
+
+    //setSuccess(true);
   };
 
-  const inputChangeHandler = (input, value) => {
-    if (input === 'username') {
-      setEnteredUsername(value);
-    } else if (input === 'password') {
-      setEnteredPassword(value);
+  const inputChangeHandler = (event) => {
+    const { id, value } = event.target;
+    setFormValues({ ...formValues, [id]: value });
+  };
+
+  const validateForm = (values) => {
+    let errors = {};
+
+    if (!values.username) {
+      errors.username = 'Username is required!';
     }
+
+    if (!values.password) {
+      errors.password = 'Password required!';
+    }
+    return errors;
   };
 
   return (
-    <div className={classes['login-container']}>
-      <Form
-        method='post'
-        onSubmit={submitHandler}
-        className={classes['login-form']}
-      >
-        <h3 className={classes.login}>LOGIN</h3>
-        <div className={classes['login-inputbox']}>
-          {/* <label htmlFor='username'>Username</label> */}
-          <input
-            type='text'
-            id='username'
-            value={enteredUsername}
-            placeholder='Username'
-            onChange={(event) =>
-              inputChangeHandler('username', event.target.value)
-            }
-            className={classes['login-input']}
-          />
+    <>
+      {/* {success ? (
+        <Navigate to='/'></Navigate>
+      ) : ( */}
+      <section>
+        <div className={classes['login-container']}>
+          <div className={classes['login-form']}>
+            <h3 className={classes.login}>LOGIN</h3>
+
+            <form onSubmit={submitHandler}>
+              <div className={classes['login-inputbox']}>
+                <label htmlFor='username'>Username</label>
+                <input
+                  type='text'
+                  id='username'
+                  ref={userRef}
+                  value={formValues.username}
+                  onChange={inputChangeHandler}
+                  className={classes['login-input']}
+                />
+                {formErrors.username && (
+                  <p style={{ color: 'red' }}>{formErrors.username}</p>
+                )}
+              </div>
+
+              <div className={classes['login-inputbox']}>
+                <label htmlFor='password'>Password</label>
+                <input
+                  type='text'
+                  id='password'
+                  value={formValues.password}
+                  // onChange={(event) =>
+                  //   inputChangeHandler('password', event.target.value)
+                  // }
+                  onChange={inputChangeHandler}
+                  className={classes['login-input']}
+                />
+                {formErrors.password && (
+                  <p style={{ color: 'red' }}>{formErrors.password}</p>
+                )}
+              </div>
+
+              <button type='submit' className={classes['btn-login']}>
+                Login
+              </button>
+              <p className={classes.register}>
+                Don't have an account? <Link to='/signup'>Register</Link>
+              </p>
+            </form>
+          </div>
         </div>
-        <div className={classes['login-inputbox']}>
-          {/* <label htmlFor='password'>Password</label> */}
-          <input
-            type='text'
-            id='password'
-            placeholder='Password'
-            onChange={(event) =>
-              inputChangeHandler('password', event.target.value)
-            }
-            className={classes['login-input']}
-          />
-        </div>
-        <button type='submit' className={classes['btn-login']}>
-          Login
-        </button>
-        <p className={classes.register}>
-          Don't have an account? <Link to='signup'>Register</Link>
-        </p>
-      </Form>
-    </div>
+      </section>
+    </>
   );
 };
 
