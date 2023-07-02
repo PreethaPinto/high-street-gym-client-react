@@ -12,7 +12,7 @@ const ClassesPage = (props) => {
     setHttpError(false);
 
     const fetchClasses = async () => {
-      const response = await fetch('http://localhost:8080/fetchedClasses');
+      const response = await fetch('http://localhost:8080/classes');
 
       if (!response.ok) {
         throw new Error('Something went wrong');
@@ -24,7 +24,7 @@ const ClassesPage = (props) => {
         for (const key in responseData) {
           loadedClasses.push({
             classesId: key,
-            fetchedClasses: responseData[key].fetchedClasses,
+            classes: responseData[key].classes,
             day: responseData[key].day,
             time: responseData[key].time,
           });
@@ -52,14 +52,14 @@ const ClassesPage = (props) => {
   if (httpError) {
     return (
       <section className={classes.classesError}>
-        <p>httpError</p>
+        <p>Could not fetch data</p>
       </section>
     );
   }
 
   const classesList = fetchedClasses.map((item) => (
     <ul key={item.classesId}>
-      <li>{item.fetchedClasses}</li>
+      <li>{item.classes}</li>
       <li>{item.day}</li>
       <li>{item.time}</li>
     </ul>
@@ -70,23 +70,23 @@ const ClassesPage = (props) => {
 
 export default ClassesPage;
 
-export const classLoader = async () => {
-  const response = await fetch('http://localhost:8080/fetchedClasses');
+// export const classLoader = async () => {
+//   const response = await fetch('http://localhost:8080/classes');
 
-  if (!response.ok) {
-    throw new Error('Something went wrong');
-  }
+//   if (!response.ok) {
+//     throw new Error('Something went wrong');
+//   }
 
-  const responseData = await response.json();
+//   const responseData = await response.json();
 
-  const loadedClasses = [];
+//   const loadedClasses = [];
 
-  for (const key in responseData) {
-    loadedClasses.push({
-      classesId: key,
-      fetchedClasses: responseData[key].fetchedClasses,
-      day: responseData[key].day,
-      time: responseData[key].time,
-    });
-  }
-};
+//   for (const key in responseData) {
+//     loadedClasses.push({
+//       classesId: key,
+//       fetchedClasses: responseData[key].fetchedClasses,
+//       day: responseData[key].day,
+//       time: responseData[key].time,
+//     });
+//   }
+// };
