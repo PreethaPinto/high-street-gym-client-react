@@ -1,47 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useLoaderData } from 'react-router-dom';
 
 const TrainersPage = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [fetchedTrainers, setFetchedTrainers] = useState([]);
-  const [httpErrors, setHttpErrors] = useState(null);
+  const trainers = useLoaderData();
 
-  useState(() => {
-    setIsLoading(true);
-    setHttpErrors(false);
-
-    const fetchTrainers = async () => {
-      const response = await fetch('http://localhost:8080/trainers');
-
-      if (!response.ok) {
-        throw new Error('Something went wrong');
-      } else {
-        const responseData = await response.json();
-
-        const loadedTrainers = [];
-
-        for (const key in responseData) {
-          loadedTrainers.push({
-            trainerId: key,
-            firstName: responseData[key].firstName,
-            lastName: responseData[key].lastName,
-            classesTaught: responseData[key].classesTaught,
-            emailId: responseData[key].emailId,
-          });
-        }
-        setFetchedTrainers(loadedTrainers);
-        console.log(loadedTrainers);
-      }
-    };
-    fetchTrainers();
-  }, []);
-
-  const trainersList = fetchedTrainers.map((trainer) => (
-    <ul>
+  const trainersList = trainers.map((trainer) => (
+    <ul key={trainer.trainer_id}>
       <li>
-        {trainer.firstName} {trainer.lastName}
+        {trainer.first_name} {trainer.last_name}
       </li>
-      <li>{trainer.classesTaught}</li>
-      <li>{trainer.emailId}</li>
+      <li>{trainer.classes_taught}</li>
+      <li>{trainer.email_id}</li>
     </ul>
   ));
 
@@ -49,3 +17,15 @@ const TrainersPage = () => {
 };
 
 export default TrainersPage;
+
+export const trainersLoader = async () => {
+  const response = await fetch('http://localhost:8080/trainers');
+
+  if (!response.ok) {
+    throw new Error('Something went wrong');
+  } else {
+    const responseData = await response.json();
+    console.log(responseData);
+    return responseData;
+  }
+};

@@ -1,7 +1,7 @@
 import { NavLink, Link } from 'react-router-dom';
 
 import classes from './MainNavigation.module.css';
-import Newsletter from '../../src/pages/Newsletter';
+import NewsletterPage from '../../src/pages/Newsletter';
 
 const MainNavigation = () => {
   return (
@@ -56,7 +56,7 @@ const MainNavigation = () => {
         </div>
       </div>
 
-      <Newsletter />
+      <NewsletterPage />
     </div>
   );
 };
