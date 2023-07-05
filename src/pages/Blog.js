@@ -1,38 +1,22 @@
-import { Link } from 'react-router-dom';
-
-const BLOG_POSTS = [
-  {
-    blogId: 1,
-    blogName: 'Blog Name 1',
-    blogContent: 'Blog content',
-  },
-  {
-    blogId: 2,
-    blogName: 'Blog Name 2',
-    blogContent: 'Blog content',
-  },
-  {
-    blogId: 3,
-    blogName: 'Blog Name 3',
-    blogContent: 'Blog content',
-  },
-];
+import { Link, json, useLoaderData } from 'react-router-dom';
+import BlogsList from '../components/BlogsList';
 
 const BlogPage = () => {
-  return (
-    <div>
-      {BLOG_POSTS.map((blog) => (
-        <div>
-          <ul>
-            <li key={blog.blogId}>
-              <Link to={`blog${blog.blogId}`}>{blog.blogName}</Link>
-            </li>
-          </ul>
-          <p>{blog.blogContent}</p>
-        </div>
-      ))}
-    </div>
-  );
+  const blogs = useLoaderData();
+
+  return <BlogsList blogs={blogs} />;
 };
 
 export default BlogPage;
+
+export const blogLoader = async () => {
+  const response = await fetch('http://localhost:8080/blogs');
+
+  if (!response.ok) {
+    throw json({ message: 'Could not fetch blogs' }, { status: 500 });
+  } else {
+    const responseData = await response.json();
+    //console.log(responseData);
+    return responseData;
+  }
+};

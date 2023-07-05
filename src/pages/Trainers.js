@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, json } from 'react-router-dom';
 
 const TrainersPage = () => {
   const trainers = useLoaderData();
@@ -22,7 +22,7 @@ export const trainersLoader = async () => {
   const response = await fetch('http://localhost:8080/trainers');
 
   if (!response.ok) {
-    throw new Error('Something went wrong');
+    throw json({ message: 'Could not fetch trainers' }, { status: 500 });
   } else {
     const responseData = await response.json();
     console.log(responseData);

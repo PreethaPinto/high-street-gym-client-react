@@ -31,7 +31,7 @@ const MainNavigation = () => {
               <li>TRAINERS</li>
             </NavLink>
             <NavLink
-              to='/blog'
+              to='/blogs'
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
