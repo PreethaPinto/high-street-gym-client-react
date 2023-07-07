@@ -1,12 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
-const BlogItem = (props) => {
+const BlogItem = ({ data }) => {
+  const [{ blog_name, blog_content }] = data;
   return (
-    <article>
-      <h1>Blog Name</h1>
-      <p>Blog Content</p>
-    </article>
+    <>
+      <h3>{blog_name}</h3>
+      <p>{blog_content}</p>
+    </>
   );
 };
 

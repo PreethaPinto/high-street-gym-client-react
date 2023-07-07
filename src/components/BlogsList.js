@@ -5,7 +5,7 @@ const BlogsList = ({ blogs }) => {
     <div>
       <ul>
         <li key={blog.blog_id}>
-          <Link to={`blogs${blog.blog_id}`}>{blog.blog_name}</Link>
+          <Link to={`${blog.blog_id}`}>{blog.blog_name}</Link>
         </li>
       </ul>
       <p>{blog.blog_content}</p>

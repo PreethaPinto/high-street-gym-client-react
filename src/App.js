@@ -9,7 +9,7 @@ import BlogsRootLayout from './pages/BlogsRootLayout';
 import ClassesPage, { classesLoader } from './pages/Classes';
 import HomePage from './pages/Home';
 import LoginPage from './pages/Login';
-import SignupPage from './pages/Signup';
+import SignupPage, { signupAction } from './pages/Signup';
 import TrainersPage, { trainersLoader } from './pages/Trainers';
 import ErrorPage from './pages/Error';
 
@@ -36,7 +36,7 @@ const App = () => {
         },
         { path: 'classes', element: <ClassesPage />, loader: classesLoader },
         { path: 'login', element: <LoginPage /> },
-        { path: 'signup', element: <SignupPage /> },
+        { path: 'signup', element: <SignupPage />, action: signupAction },
         { path: 'trainers', element: <TrainersPage />, loader: trainersLoader },
       ],
     },
