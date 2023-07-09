@@ -1,193 +1,114 @@
-import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Form, json, useActionData } from 'react-router-dom';
 
 import classes from './Signup.module.css';
 
 const SignupPage = () => {
-  const firstNameRef = useRef();
-
-  useEffect(() => {
-    firstNameRef.current.focus();
-  }, []);
-
-  const initialValues = {
-    firstName: '',
-    lastName: '',
-    phone: '',
-    email: '',
-    username: '',
-    password: '',
-    password2: '',
-  };
-
-  const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const submitHandler = (event) => {
-    event.preventDefault();
-    setFormErrors(validateForm(formValues));
-    // setIsSubmitted(true);
-  };
-
-  const inputChangeHandler = (event) => {
-    const { id, value } = event.target;
-    console.log(id, value);
-    setFormValues({ ...formValues, [id]: value });
-  };
-
-  const validateForm = (values) => {
-    let errors = {};
-
-    const emailRegex = /^[a-zA-Z][a-zA-z0-9-_]{3,23}/;
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%]).{8,24}$/;
-
-    if (!values.firstName) {
-      errors.firstName = 'First name is required!';
-    }
-
-    if (!values.lastName) {
-      errors.lastName = 'Last name is required!';
-    }
-
-    if (!values.phone) {
-      errors.phone = 'Phone is required!';
-    }
-
-    if (!values.email) {
-      errors.email = 'Email address is required!';
-    } else if (!emailRegex.test(values.email)) {
-      errors.email = 'Email is invalid!';
-    }
-
-    if (!values.username) {
-      errors.username = 'Last name is required!';
-    }
-
-    if (!values.password) {
-      errors.password = 'Password is required!';
-    } else if (!passwordRegex.test(values.password)) {
-      errors.password =
-        'Password must contain at least 8 characters, one lowercase, one uppercase and one special character(!@#$%)';
-    }
-
-    if (!values.password2) {
-      errors.password2 = 'Password is required!';
-    } else if (values.password2 !== values.password) {
-      errors.password2 = 'Passwords do not match!';
-    }
-    return errors;
-  };
+  const data = useActionData();
 
   return (
     <div className={classes['signup-container']}>
       <div className={classes['signup-form']}>
         <h2 className={classes.signup}>SIGN UP</h2>
-        <form onSubmit={submitHandler}>
+        <Form method='post'>
+          {data && data.userValidate && (
+            <ul>
+              {data.userValidate.map((err) => (
+                <li key={err}>{err}</li>
+              ))}
+            </ul>
+          )}
           <div>
-            <label htmlFor='first-name'>First Name</label>
+            <label htmlFor='first_name'>First Name</label>
             <input
-              ref={firstNameRef}
-              onChange={inputChangeHandler}
-              value={formValues.firstName}
-              id='firstName'
+              id='first_name'
+              name='first_name'
               type='text'
               placeholder='First Name'
               className={classes['signup-input']}
             />
-            {formErrors.firstName && (
-              <p style={{ color: 'red' }}>{formErrors.firstName}</p>
-            )}
+            {/* {errors.first_name && (
+              <p style={{ color: 'red' }}>{errors.first_name}</p>
+            )} */}
           </div>
           <div>
-            <label htmlFor='last-name'>Last Name</label>
+            <label htmlFor='last_name'>Last Name</label>
             <input
-              onChange={inputChangeHandler}
-              value={formValues.lastName}
-              id='lastName'
+              id='last_name'
               type='text'
+              name='last_name'
               placeholder='Last Name'
               className={classes['signup-input']}
             />
-            {formErrors.lastName && (
-              <p style={{ color: 'red' }}>{formErrors.lastName}</p>
-            )}
+            {/* {errors.last_name && (
+              <p style={{ color: 'red' }}>{errors.last_name}</p>
+            )} */}
           </div>
           <div>
-            <label htmlFor='phone'>Phone</label>
+            <label htmlFor='phone_number'>Phone</label>
             <input
-              onChange={inputChangeHandler}
-              value={formValues.phone}
-              id='phone'
+              id='phone_number'
               type='text'
+              name='phone_number'
               placeholder='Phone Number'
               className={classes['signup-input']}
             />
-            {formErrors.phone && (
-              <p style={{ color: 'red' }}>{formErrors.phone}</p>
-            )}
+            {/* {errors.phone_number && <p style={{ color: 'red' }}>{errors.phone_number}</p>} */}
           </div>
           <div>
-            <label htmlFor='email'>Email</label>
+            <label htmlFor='email_id'>Email</label>
             <input
-              onChange={inputChangeHandler}
-              value={formValues.email}
-              id='email'
+              id='email_id'
               type='text'
+              name='email_id'
               placeholder='Email'
               className={classes['signup-input']}
             />
-            {formErrors.email && (
-              <p style={{ color: 'red' }}>{formErrors.email}</p>
-            )}
+            {/* {errors.email_id && <p style={{ color: 'red' }}>{errors.email_id}</p>} */}
           </div>
           <div>
             <label htmlFor='username'>Username</label>
             <input
-              onChange={inputChangeHandler}
-              value={formValues.username}
               id='username'
               type='text'
+              name='username'
               placeholder='Username'
               className={classes['signup-input']}
             />
-            {formErrors.username && (
-              <p style={{ color: 'red' }}>{formErrors.username}</p>
-            )}
+            {/* {errors.username && (
+              <p style={{ color: 'red' }}>{errors.username}</p>
+            )} */}
           </div>
 
           <div>
             <label htmlFor='password'>Password</label>
             <input
-              onChange={inputChangeHandler}
-              value={formValues.password}
               id='password'
               type='text'
+              name='password'
               placeholder='Password'
               className={classes['signup-input']}
             />
-            {formErrors.password && (
-              <p style={{ color: 'red' }}>{formErrors.password}</p>
-            )}
+            {/* {errors.password && (
+              <p style={{ color: 'red' }}>{errors.password}</p>
+            )} */}
           </div>
           <div>
-            <label htmlFor='password2'>Confirm Password</label>
+            <label htmlFor='confirm_password'>Confirm Password</label>
             <input
-              onChange={inputChangeHandler}
-              value={formValues.password2}
-              id='password2'
+              id='confirm_password'
               type='text'
+              name='confirm_password'
               placeholder='Confirm Password'
               className={classes['signup-input']}
             />
-            {formErrors.password2 && (
-              <p style={{ color: 'red' }}>{formErrors.password2}</p>
-            )}
+            {/* {errors.confirm_password && (
+              <p style={{ color: 'red' }}>{errors.confirm_password}</p>
+            )} */}
           </div>
           <button type='submit' className={classes['btn-signup']}>
             Sign Up
           </button>
-        </form>
+        </Form>
         <p>
           Already a member? <Link to='/login'>Login</Link>
         </p>
@@ -197,3 +118,34 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
+
+export const signupAction = async ({ request }) => {
+  const data = await request.formData();
+
+  const signupData = {
+    first_name: data.get('first_name'),
+    last_name: data.get('last_name'),
+    phone_number: data.get('phone_number'),
+    email_id: data.get('email_id'),
+    username: data.get('username'),
+    password: data.get('password'),
+    confirm_password: data.get('confirm_password'),
+  };
+  console.log(signupData);
+
+  const response = await fetch('http://localhost:8080/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(signupData),
+  });
+
+  if (response.status === 400) {
+    return response;
+  }
+
+  if (!response.ok) {
+    throw json({ message: 'Could not submit form' }, { status: 500 });
+  }
+};

@@ -1,4 +1,4 @@
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, Form, json, redirect } from 'react-router-dom';
 
 import { useState, useEffect, useRef } from 'react';
 
@@ -7,8 +7,8 @@ import classes from './Login.module.css';
 const LoginPage = (props) => {
   const userRef = useRef();
 
-  const [formValues, setFormValues] = useState({ username: '', password: '' });
-  const [formErrors, setFormErrors] = useState({});
+  // const [formValues, setFormValues] = useState({ username: '', password: '' });
+  // const [formErrors, setFormErrors] = useState({});
 
   //const [success, setSuccess] = useState(false);
 
@@ -16,30 +16,30 @@ const LoginPage = (props) => {
     userRef.current.focus();
   }, []);
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-    setFormErrors(validateForm(formValues));
+  // const submitHandler = (event) => {
+  //   event.preventDefault();
+  //   setFormErrors(validateForm(formValues));
 
-    //setSuccess(true);
-  };
+  //   //setSuccess(true);
+  // };
 
-  const inputChangeHandler = (event) => {
-    const { id, value } = event.target;
-    setFormValues({ ...formValues, [id]: value });
-  };
+  // const inputChangeHandler = (event) => {
+  //   const { id, value } = event.target;
+  //   setFormValues({ ...formValues, [id]: value });
+  // };
 
-  const validateForm = (values) => {
-    let errors = {};
+  // const validateForm = (values) => {
+  //   let errors = {};
 
-    if (!values.username) {
-      errors.username = 'Username is required!';
-    }
+  //   if (!values.username) {
+  //     errors.username = 'Username is required!';
+  //   }
 
-    if (!values.password) {
-      errors.password = 'Password required!';
-    }
-    return errors;
-  };
+  //   if (!values.password) {
+  //     errors.password = 'Password required!';
+  //   }
+  //   return errors;
+  // };
 
   return (
     <>
@@ -51,20 +51,18 @@ const LoginPage = (props) => {
           <div className={classes['login-form']}>
             <h3 className={classes.login}>LOGIN</h3>
 
-            <form onSubmit={submitHandler}>
+            <Form method='post'>
               <div className={classes['login-inputbox']}>
                 <label htmlFor='username'>Username</label>
                 <input
                   type='text'
                   id='username'
                   ref={userRef}
-                  value={formValues.username}
-                  onChange={inputChangeHandler}
                   className={classes['login-input']}
                 />
-                {formErrors.username && (
+                {/* {formErrors.username && (
                   <p style={{ color: 'red' }}>{formErrors.username}</p>
-                )}
+                )} */}
               </div>
 
               <div className={classes['login-inputbox']}>
@@ -72,16 +70,14 @@ const LoginPage = (props) => {
                 <input
                   type='text'
                   id='password'
-                  value={formValues.password}
                   // onChange={(event) =>
                   //   inputChangeHandler('password', event.target.value)
                   // }
-                  onChange={inputChangeHandler}
                   className={classes['login-input']}
                 />
-                {formErrors.password && (
+                {/* {formErrors.password && (
                   <p style={{ color: 'red' }}>{formErrors.password}</p>
-                )}
+                )} */}
               </div>
 
               <button type='submit' className={classes['btn-login']}>
@@ -90,7 +86,7 @@ const LoginPage = (props) => {
               <p className={classes.register}>
                 Don't have an account? <Link to='/signup'>Register</Link>
               </p>
-            </form>
+            </Form>
           </div>
         </div>
       </section>
@@ -99,3 +95,32 @@ const LoginPage = (props) => {
 };
 
 export default LoginPage;
+
+export const loginAction = async ({ request }) => {
+  try {
+    const data = await request.formData();
+
+    const loginData = {
+      username: data.get('username'),
+      password: data.get('password'),
+    };
+
+    const response = await fetch('http://localhost:8080/login', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(loginData),
+    });
+
+    if (!response.ok) {
+      throw json({ message: 'Could not login' }, { status: 500 });
+    }
+
+    const responseData = await response.json();
+    console.log(responseData);
+  } catch (err) {
+    console.log('Error:', err);
+    // Handle the error as needed
+  }
+};
