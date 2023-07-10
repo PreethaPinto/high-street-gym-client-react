@@ -1,13 +1,26 @@
-import { useParams } from 'react-router-dom';
+import { useLoaderData, json } from 'react-router-dom';
+
+import BlogItem from '../components/BlogItem';
 
 const BlogDetailPage = () => {
-  const params = useParams();
-  return (
-    <div>
-      <h2>Blog Page</h2>
-      <p>{params.blogId}</p>
-    </div>
-  );
+  const data = useLoaderData();
+  console.log(data.blog_name);
+
+  return <BlogItem data={data} />;
 };
 
 export default BlogDetailPage;
+
+export const blogDetailsLoader = async ({ request, params }) => {
+  const id = params.blogId;
+  console.log(id);
+  const response = await fetch('http://localhost:8080/blogs/' + id);
+
+  if (!response.ok) {
+    throw json({ message: 'Could not fetch blog' }, { status: 500 });
+  } else {
+    const responseData = await response.json();
+    console.log(responseData);
+    return responseData;
+  }
+};
