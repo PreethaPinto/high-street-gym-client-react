@@ -13,81 +13,72 @@ const TrainersPage = () => {
   };
 
   const zumbaTrainers = filterTrainersByClassesTaught(trainers, 'Zumba');
-  const [zumbaData, setZumbaData] = useState(zumbaTrainers);
 
   const yogaTrainers = filterTrainersByClassesTaught(trainers, 'Yoga');
-  const [yogaData, setYogaData] = useState(yogaTrainers);
 
   const pilatesTrainers = filterTrainersByClassesTaught(trainers, 'Pilates');
-  const [pilatesData, setPilatesData] = useState(pilatesTrainers);
 
   const boxingTrainers = filterTrainersByClassesTaught(trainers, 'Boxing');
-  const [boxingData, setBoxingData] = useState(boxingTrainers);
 
   const indoorCyclingTrainers = filterTrainersByClassesTaught(
     trainers,
     'Indoor Cycling'
   );
-  const [indoorCyclingData, setIndoorCyclingData] = useState(
-    indoorCyclingTrainers
-  );
 
   const absTrainers = filterTrainersByClassesTaught(trainers, 'Abs');
-  const [absData, setAbsData] = useState(absTrainers);
 
   const HIITTrainers = filterTrainersByClassesTaught(trainers, 'HIIT');
-  const [HIITData, setHIITData] = useState(HIITTrainers);
-  // const trainersList = trainers.map((trainer, index) => (
-  //   <div key={index} className={classes.trainers}>
-  //     <div>{trainer.image}</div>
-  //     <h3>
-  //       {trainer.first_name} {trainer.last_name}
-  //     </h3>
-  //     <p>Classes Taught: {trainer.classes_taught}</p>
-  //     <p>Email ID: {trainer.email_id}</p>
-  //   </div>
-  // ));
+
+  const [state] = useState({
+    absData: absTrainers,
+    boxingData: boxingTrainers,
+    HIITData: HIITTrainers,
+    indoorCyclingData: indoorCyclingTrainers,
+    pilatesData: pilatesTrainers,
+    yogaData: yogaTrainers,
+    zumbaData: zumbaTrainers,
+  });
 
   return (
     <>
       <div className={classes['trainer-wrapper']}>
         <div className={classes['classes-available']}>
           <button>
-            <Link to='trainers-zumba' state={{ data: zumbaData }}>
+            <Link to='trainers-zumba' state={{ data: state.zumbaData }}>
               Zumba
             </Link>
             Zumba
           </button>
           <button>
-            <Link to='trainers-HIIT' state={{ data: HIITData }}>
+            <Link to='trainers-HIIT' state={{ data: state.HIITData }}>
               HIIT
             </Link>
           </button>
           <button>
-            <Link to='trainers-Yoga' state={{ data: yogaData }}>
+            <Link to='trainers-Yoga' state={{ data: state.yogaData }}>
               Yoga
             </Link>
           </button>
           <button>
-            <Link to='trainers-pilates' state={{ data: pilatesData }}>
+            <Link to='trainers-pilates' state={{ data: state.pilatesData }}>
               Pilates
             </Link>
           </button>
           <button>
-            <Link to='trainers-boxing' state={{ data: boxingData }}>
+            <Link to='trainers-boxing' state={{ data: state.boxingData }}>
               Boxing
             </Link>
           </button>
           <button>
             <Link
               to='trainers-indoor-cycling'
-              state={{ data: indoorCyclingData }}
+              state={{ data: state.indoorCyclingData }}
             >
               Indoor Cycling
             </Link>
           </button>
           <button>
-            <Link to='trainers-abs' state={{ data: absData }}>
+            <Link to='trainers-abs' state={{ data: state.absData }}>
               Abs
             </Link>
           </button>
