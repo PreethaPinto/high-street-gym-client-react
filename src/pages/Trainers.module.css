@@ -1,0 +1,18 @@
+.trainer-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gym-class {
+  margin: 20px;
+  border: 1px solid white;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+  width: 400px;
+  height: 100px;
+  text-align: center;
+  padding-top: 40px;
+}

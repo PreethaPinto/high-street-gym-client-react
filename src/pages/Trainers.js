@@ -42,47 +42,56 @@ const TrainersPage = () => {
   return (
     <>
       <div className={classes['trainer-wrapper']}>
-        <div className={classes['classes-available']}>
-          <button>
-            <Link to='trainers-zumba' state={{ data: state.zumbaData }}>
-              Zumba
-            </Link>
-            Zumba
-          </button>
-          <button>
-            <Link to='trainers-HIIT' state={{ data: state.HIITData }}>
-              HIIT
-            </Link>
-          </button>
-          <button>
-            <Link to='trainers-Yoga' state={{ data: state.yogaData }}>
-              Yoga
-            </Link>
-          </button>
-          <button>
-            <Link to='trainers-pilates' state={{ data: state.pilatesData }}>
-              Pilates
-            </Link>
-          </button>
-          <button>
-            <Link to='trainers-boxing' state={{ data: state.boxingData }}>
-              Boxing
-            </Link>
-          </button>
-          <button>
-            <Link
-              to='trainers-indoor-cycling'
-              state={{ data: state.indoorCyclingData }}
-            >
-              Indoor Cycling
-            </Link>
-          </button>
-          <button>
-            <Link to='trainers-abs' state={{ data: state.absData }}>
-              Abs
-            </Link>
-          </button>
-        </div>
+        <Link
+          to='trainers-zumba'
+          state={{ data: state.zumbaData }}
+          className={classes['gym-class']}
+        >
+          Zumba
+        </Link>
+
+        <Link
+          to='trainers-HIIT'
+          state={{ data: state.HIITData }}
+          className={classes['gym-class']}
+        >
+          HIIT
+        </Link>
+        <Link
+          to='trainers-Yoga'
+          state={{ data: state.yogaData }}
+          className={classes['gym-class']}
+        >
+          Yoga
+        </Link>
+        <Link
+          to='trainers-pilates'
+          state={{ data: state.pilatesData }}
+          className={classes['gym-class']}
+        >
+          Pilates
+        </Link>
+        <Link
+          to='trainers-boxing'
+          state={{ data: state.boxingData }}
+          className={classes['gym-class']}
+        >
+          Boxing
+        </Link>
+        <Link
+          to='trainers-indoor-cycling'
+          state={{ data: state.indoorCyclingData }}
+          className={classes['gym-class']}
+        >
+          Indoor Cycling
+        </Link>
+        <Link
+          to='trainers-abs'
+          state={{ data: state.absData }}
+          className={classes['gym-class']}
+        >
+          Abs
+        </Link>
       </div>
     </>
   );

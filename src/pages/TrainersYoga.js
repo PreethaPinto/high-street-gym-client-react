@@ -1,19 +1,24 @@
 import { useLocation } from 'react-router-dom';
 
-const TrainersYoga = (props) => {
+import classes from './TrainersClasses.module.css';
+
+const TrainersYoga = () => {
   const location = useLocation();
   const yogaTrainers = location.state.data;
   console.log(yogaTrainers);
   return (
     <>
       {yogaTrainers.map((trainer) => (
-        <ul key={trainer.trainer_id}>
-          <li>
-            {trainer.first_name} {trainer.last_name}
-          </li>
-          <li>{trainer.classes_taught}</li>
-          <li>{trainer.email_id}</li>
-        </ul>
+        <div className={classes.wrapper}>
+          <ul key={trainer.trainer_id}>
+            <li>
+              {trainer.first_name} {trainer.last_name}
+            </li>
+            <li>{trainer.classes_taught}</li>
+            <li>{trainer.email_id}</li>
+          </ul>
+          <button className={classes['trainer-button']}>Book</button>
+        </div>
       ))}
     </>
   );
