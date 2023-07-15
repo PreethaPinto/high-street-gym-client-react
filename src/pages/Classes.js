@@ -3,17 +3,23 @@ import { useLoaderData, json } from 'react-router-dom';
 import classes from './Classes.module.css';
 
 const ClassesPage = (props) => {
-  const classes = useLoaderData();
+  const classesList = useLoaderData();
 
-  const loadedClasses = classes.map((item) => (
-    <ul key={item.classes_id}>
-      <li>{item.classes}</li>
-      <li>{item.day}</li>
-      <li>{item.time}</li>
-    </ul>
-  ));
-
-  return <>{loadedClasses}</>;
+  return (
+    <>
+      <table className={classes.table}>
+        {classesList.map((item, index) => {
+          return (
+            <tr key={index} className={classes.row}>
+              <td className={classes.data}>{item.day}</td>
+              <td className={classes.data}>{item.classes}</td>
+              <td className={classes.data}>{item.time}</td>
+            </tr>
+          );
+        })}
+      </table>
+    </>
+  );
 };
 
 export default ClassesPage;
