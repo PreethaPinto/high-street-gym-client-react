@@ -1,63 +1,80 @@
+import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
 import classes from './MainNavigation.module.css';
 import NewsletterPage from '../../src/pages/Newsletter';
 
 const MainNavigation = () => {
-  return (
-    <div>
-      <div className={classes.header}>
-        <div>
-          <Link to='/' className={classes.logo}>
-            <h2>HIGH STREET GYM</h2>
-          </Link>
-        </div>
-        <div className={classes.menu}>
-          <ul className={classes.list}>
-            <NavLink
-              to='/classes'
-              className={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-            >
-              <li>CLASSES</li>
-            </NavLink>
-            <NavLink
-              to='/trainers'
-              className={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-            >
-              <li>TRAINERS</li>
-            </NavLink>
-            <NavLink
-              to='/blogs'
-              className={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-            >
-              <li>BLOG</li>
-            </NavLink>
-            <NavLink
-              to='/about'
-              className={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-            >
-              <li>ABOUT</li>
-            </NavLink>
-            <NavLink to='/login'>
-              <button className={classes['btn-header']}>MEMBER LOGIN</button>
-            </NavLink>
-            <NavLink to='/signup'>
-              <button className={classes['btn-header']}>BECOME A MEMBER</button>
-            </NavLink>
-          </ul>
-        </div>
-      </div>
+  const [menuOpen, setMenuOpen] = useState(false);
 
-      <NewsletterPage />
-    </div>
+  return (
+    <nav>
+      <Link to='/' className={classes.logo}>
+        <h2 className={classes['logo-name']}>HIGH STREET GYM</h2>
+        <h2 className={classes['logo-initials']}>HSG</h2>
+      </Link>
+      <div
+        className={classes.burger}
+        onClick={() => {
+          console.log('Clicked');
+          setMenuOpen(!menuOpen);
+        }}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul className={menuOpen ? classes.open : ''}>
+        <li>
+          <NavLink
+            to='/classes'
+            className={({ isActive }) =>
+              isActive ? classes.active : undefined
+            }
+          >
+            CLASSES
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to='/trainers'
+            className={({ isActive }) =>
+              isActive ? classes.active : undefined
+            }
+          >
+            TRAINERS
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to='/blogs'
+            className={({ isActive }) =>
+              isActive ? classes.active : undefined
+            }
+          >
+            BLOG
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to='/about'
+            className={({ isActive }) =>
+              isActive ? classes.active : undefined
+            }
+          >
+            ABOUT
+          </NavLink>
+        </li>
+        <NavLink to='/login'>
+          <button className={classes['btn-header']}>MEMBER LOGIN</button>
+        </NavLink>
+        <NavLink to='/signup'>
+          <button className={classes['btn-header']}>BECOME A MEMBER</button>
+        </NavLink>
+      </ul>
+
+      {/* <NewsletterPage /> */}
+    </nav>
   );
 };
 
