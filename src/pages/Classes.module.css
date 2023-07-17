@@ -62,7 +62,7 @@ tbody tr:nth-of-type(odd) {
 
   table tr td {
     padding: 1.5rem;
-    text-align: right;
+    text-align: center;
     display: block;
   }
 }
