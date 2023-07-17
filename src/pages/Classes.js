@@ -7,13 +7,19 @@ const ClassesPage = (props) => {
 
   return (
     <>
-      <table className={classes.table}>
+      <table>
         {classesList.map((item, index) => {
           return (
-            <tr key={index} className={classes.row}>
-              <td className={classes.data}>{item.day}</td>
-              <td className={classes.data}>{item.classes}</td>
-              <td className={classes.data}>{item.time}</td>
+            <tr key={index}>
+              <td data-title='day' className={classes.data}>
+                {item.day}
+              </td>
+              <td data-title='class' className={classes.data}>
+                {item.classes}
+              </td>
+              <td data-title='time' className={classes.data}>
+                {item.time}
+              </td>
             </tr>
           );
         })}
