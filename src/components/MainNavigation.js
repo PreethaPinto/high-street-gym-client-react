@@ -16,7 +16,6 @@ const MainNavigation = () => {
       <div
         className={classes.burger}
         onClick={() => {
-          console.log('Clicked');
           setMenuOpen(!menuOpen);
         }}
       >
@@ -28,6 +27,9 @@ const MainNavigation = () => {
         <li>
           <NavLink
             to='/classes'
+            onClick={() => {
+              setMenuOpen(false);
+            }}
             className={({ isActive }) =>
               isActive ? classes.active : undefined
             }
@@ -41,6 +43,9 @@ const MainNavigation = () => {
             className={({ isActive }) =>
               isActive ? classes.active : undefined
             }
+            onClick={() => {
+              setMenuOpen(false);
+            }}
           >
             TRAINERS
           </NavLink>
@@ -51,6 +56,9 @@ const MainNavigation = () => {
             className={({ isActive }) =>
               isActive ? classes.active : undefined
             }
+            onClick={() => {
+              setMenuOpen(false);
+            }}
           >
             BLOG
           </NavLink>
@@ -61,16 +69,38 @@ const MainNavigation = () => {
             className={({ isActive }) =>
               isActive ? classes.active : undefined
             }
+            onClick={() => {
+              setMenuOpen(false);
+            }}
           >
             ABOUT
           </NavLink>
         </li>
-        <NavLink to='/login'>
+        <li>
+          <NavLink to='/write' onClick={() => setMenuOpen(false)}>
+            WRITE
+          </NavLink>
+        </li>
+        <li>John</li>
+        <li>
+          <NavLink>Logout</NavLink>
+        </li>
+        {/* <NavLink
+          to='/login'
+          onClick={() => {
+            setMenuOpen(false);
+          }}
+        >
           <button className={classes['btn-header']}>MEMBER LOGIN</button>
-        </NavLink>
-        <NavLink to='/signup'>
+        </NavLink> */}
+        {/* <NavLink
+          to='/signup'
+          onClick={() => {
+            setMenuOpen(false);
+          }}
+        >
           <button className={classes['btn-header']}>BECOME A MEMBER</button>
-        </NavLink>
+        </NavLink> */}
       </ul>
 
       {/* <NewsletterPage /> */}

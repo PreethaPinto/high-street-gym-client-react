@@ -8,10 +8,20 @@ import BlogDetailPage, { blogDetailsLoader } from './pages/BlogDetail';
 import BlogsRootLayout from './pages/BlogsRootLayout';
 import ClassesPage, { classesLoader } from './pages/Classes';
 import HomePage from './pages/Home';
-import LoginPage from './pages/Login';
+import LoginPage, { loginAction } from './pages/Login';
 import SignupPage, { signupAction } from './pages/Signup';
 import TrainersPage, { trainersLoader } from './pages/Trainers';
 import ErrorPage from './pages/Error';
+import TrainersRootLayout from './pages/TrainersRootLayout';
+import TrainersZumba from './pages/TrainersZumba';
+import TrainersYoga from './pages/TrainersYoga';
+import TrainersHIIT from './pages/TrainersHIIT';
+import TrainersIndoorCycling from './pages/TrainersIndoorCycling';
+import TrainersPilates from './pages/TrainersPilates';
+import TrainersBoxing from './pages/TrainersBoxing';
+import TrainersAbs from './pages/TrainersAbs';
+import Write from './pages/Write';
+import Footer from './components/Footer';
 
 const App = () => {
   const router = createBrowserRouter([
@@ -22,6 +32,7 @@ const App = () => {
       children: [
         { index: true, element: <HomePage /> },
         { path: 'about', element: <AboutPage /> },
+        { path: 'write', element: <Write /> },
         {
           path: 'blogs',
           element: <BlogsRootLayout />,
@@ -35,9 +46,25 @@ const App = () => {
           ],
         },
         { path: 'classes', element: <ClassesPage />, loader: classesLoader },
-        { path: 'login', element: <LoginPage /> },
+        { path: 'login', element: <LoginPage />, action: loginAction },
         { path: 'signup', element: <SignupPage />, action: signupAction },
-        { path: 'trainers', element: <TrainersPage />, loader: trainersLoader },
+        {
+          path: 'trainers',
+          element: <TrainersRootLayout />,
+          children: [
+            { index: true, element: <TrainersPage />, loader: trainersLoader },
+            { path: 'trainers-zumba', element: <TrainersZumba /> },
+            { path: 'trainers-yoga', element: <TrainersYoga /> },
+            { path: 'trainers-HIIT', element: <TrainersHIIT /> },
+            { path: 'trainers-boxing', element: <TrainersBoxing /> },
+            { path: 'trainers-pilates', element: <TrainersPilates /> },
+            {
+              path: 'trainers-indoor-cycling',
+              element: <TrainersIndoorCycling />,
+            },
+            { path: 'trainers-abs', element: <TrainersAbs /> },
+          ],
+        },
       ],
     },
   ]);

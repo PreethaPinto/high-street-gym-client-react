@@ -9,7 +9,7 @@
 }
 
 table {
-  border: 2px solid white;
+  border: 2px solid grey;
   border-collapse: collapse;
   text-align: center;
   width: 100%;
@@ -18,10 +18,11 @@ table {
 
 table tr td {
   padding: 2.5rem;
+  color: white;
 }
 
 tr:nth-of-type(odd) {
-  background-color: rgb(255, 255, 255, 0.3);
+  background-color: rgb(255, 255, 255, 0.1);
 }
 
 tr:nth-of-type(even) {
