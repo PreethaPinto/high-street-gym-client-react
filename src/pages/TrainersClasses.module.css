@@ -17,11 +17,11 @@
   cursor: pointer;
 }
 
-ul {
+.trainer-list {
   list-style-type: none;
   padding: 0;
 }
 
-li {
+.trainer-list li {
   margin: 20px;
 }

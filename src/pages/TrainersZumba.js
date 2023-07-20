@@ -12,7 +12,7 @@ const TrainersZumba = (props) => {
     <>
       {zumbaTrainers.map((trainer) => (
         <div className={classes.wrapper}>
-          <ul key={trainer.trainer_id}>
+          <ul key={trainer.trainer_id} className={classes['trainer-list']}>
             <li>
               {trainer.first_name} {trainer.last_name}
             </li>
