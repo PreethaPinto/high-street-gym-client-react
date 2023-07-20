@@ -1,7 +1,8 @@
 import { blogLoader } from '../pages/Blog';
 import { useState, useEffect } from 'react';
 
-import classes from './BlogMenu.module.css';
+import classes from './BlogMenu.module.scss';
+
 const BlogMenu = () => {
   const [blogs, setBlogs] = useState([]);
 

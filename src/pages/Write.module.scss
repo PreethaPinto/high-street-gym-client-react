@@ -1,0 +1,16 @@
+.write {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.write .content {
+  flex: 5;
+}
+
+.write .menu {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

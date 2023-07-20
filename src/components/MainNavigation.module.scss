@@ -1,0 +1,113 @@
+@import '../styles/variables';
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: $secondary-color;
+  padding: 0 50px;
+  background-color: rgba(0, 0, 0);
+
+  .logo {
+    font-weight: 700;
+    color: $primary-color;
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+
+  .logo-initials {
+    display: none;
+  }
+
+  ul {
+    display: flex;
+
+    li {
+      list-style: none;
+      padding: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: $secondary-color;
+      cursor: pointer;
+      margin: 0 10px;
+    }
+
+    a:hover,
+    a.active {
+      color: $primary-color;
+    }
+  }
+
+  .burger {
+    position: absolute;
+    top: 2rem;
+    right: 2.5rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 2.25rem;
+    height: 2rem;
+
+    span {
+      height: 0.3rem;
+      width: 100%;
+      background-color: $primary-color;
+      border-radius: 0.2rem;
+    }
+  }
+
+  button {
+    color: $font-color;
+    background-color: $primary-color;
+    padding: 10px;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    align-items: start;
+
+    .logo-name {
+      display: none;
+    }
+
+    .logo-initials {
+      display: block;
+    }
+
+    .burger {
+      display: flex;
+      color: $primary-color;
+    }
+
+    ul {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      margin-bottom: 0.25rem;
+
+      a,
+      button {
+        margin: 0.2rem 0.5rem;
+        align-self: center;
+      }
+
+      li {
+        text-align: center;
+        width: 100%;
+      }
+    }
+    ul.open {
+      display: flex;
+    }
+
+    .btn-header {
+      text-align: center;
+    }
+  }
+}

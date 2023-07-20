@@ -1,0 +1,48 @@
+@import '../styles/variables';
+
+// /* .classesLoading {
+//   text-align: center;
+//   color: #e7e7e7;
+// }
+
+// .classesError {
+//   text-align: center;
+//   color: $font-color;
+// } */
+
+table {
+  border: 2px solid $secondary-color;
+  border-collapse: collapse;
+  text-align: center;
+  width: 100%;
+  margin: 0%;
+
+  td {
+    padding: 2.5rem;
+    color: $font-color;
+
+    th {
+      background-color: black;
+    }
+  }
+
+  tr:nth-of-type(odd) {
+    background-color: $background-color;
+  }
+
+  tr:nth-of-type(even) {
+    background-color: black;
+  }
+}
+
+@media (max-width: 600px) {
+  table tr {
+    display: block;
+
+    table tr td {
+      padding: 1.5rem;
+      text-align: center;
+      display: block;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-import classes from './TrainersClasses.module.css';
+import classes from './TrainersClasses.module.scss';
 
 const TrainersIndoorCycling = () => {
   const location = useLocation();

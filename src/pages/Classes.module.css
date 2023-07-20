@@ -1,13 +1,3 @@
-.classesLoading {
-  text-align: center;
-  color: #e7e7e7;
-}
-
-.classesError {
-  text-align: center;
-  color: #e7e7e7;
-}
-
 table {
   border: 2px solid grey;
   border-collapse: collapse;
@@ -15,55 +5,27 @@ table {
   width: 100%;
   margin: 0%;
 }
-
-table tr td {
+table td {
   padding: 2.5rem;
-  color: white;
+  color: rgb(193, 193, 193);
 }
-
-tr:nth-of-type(odd) {
-  background-color: rgb(255, 255, 255, 0.1);
-}
-
-tr:nth-of-type(even) {
+table td th {
   background-color: black;
 }
-
-tr th {
+table tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+table tr:nth-of-type(even) {
   background-color: black;
 }
-
-/* table {
-  border-collapse: collapse;
-  margin: 0;
-  width: 100%;
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.25);
-}
-
-table tr {
-  padding: 0.5rem;
-}
-
-thead th {
-  background-color: orangered;
-  font-size: 1.15rem;
-}
-
-/* tbody tr:nth-of-type(even) {
-  background-color: black;
-}
-tbody tr:nth-of-type(odd) {
-  background-color: rgba(255, 255, 255, 0.25);
-} */
 
 @media (max-width: 600px) {
   table tr {
     display: block;
   }
-
-  table tr td {
+  table tr table tr td {
     padding: 1.5rem;
     text-align: center;
     display: block;
   }
-}
+}/*# sourceMappingURL=Classes.module.css.map */

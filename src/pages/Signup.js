@@ -1,13 +1,13 @@
 import { Link, Form, json, useActionData } from 'react-router-dom';
 
-import classes from './Signup.module.css';
+import classes from './RegisterSignup.module.scss';
 
 const SignupPage = () => {
   const data = useActionData();
 
   return (
-    <div className={classes['signup-container']}>
-      <h2 className={classes.signup}>SIGN UP</h2>
+    <div className={classes.container}>
+      <h2>SIGN UP</h2>
       <Form method='post'>
         {data && data.userValidate && (
           <ul>

@@ -2,26 +2,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid white;
+  border: 1px solid grey;
   border-radius: 10px;
   height: 150px;
   width: 600px;
   padding: 0 40px;
   margin: 50px auto 20px;
 }
-
-.trainer-button {
+.wrapper ul {
+  list-style-type: none;
+  padding: 0;
+}
+.wrapper ul li {
+  margin: 20px;
+}
+.wrapper button {
   height: 30px;
   width: 70px;
   align-self: center;
   cursor: pointer;
-}
-
-.trainer-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.trainer-list li {
-  margin: 20px;
-}
+}/*# sourceMappingURL=TrainersClasses.module.css.map */

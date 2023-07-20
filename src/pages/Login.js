@@ -2,7 +2,7 @@ import { Link, Form, json, useActionData } from 'react-router-dom';
 
 import { useEffect, useRef } from 'react';
 
-import classes from './Login.module.css';
+import classes from './RegisterSignup.module.scss';
 
 const LoginPage = () => {
   const data = useActionData();
@@ -17,8 +17,8 @@ const LoginPage = () => {
       {/* {success ? (
         <Navigate to='/'></Navigate>
       ) : ( */}
-      <div className={classes['login-container']}>
-        <h1 className={classes.login}>LOGIN</h1>
+      <div className={classes.container}>
+        <h1>LOGIN</h1>
         <Form method='post'>
           <input
             type='text'
@@ -26,7 +26,6 @@ const LoginPage = () => {
             name='username'
             placeholder='Username'
             ref={userRef}
-            className={classes['login-input']}
           />
 
           <input
@@ -37,14 +36,11 @@ const LoginPage = () => {
             // onChange={(event) =>
             //   inputChangeHandler('password', event.target.value)
             // }
-            className={classes['login-input']}
           />
 
-          <button type='submit' className={classes['btn-login']}>
-            Login
-          </button>
+          <button type='submit'>Login</button>
           <p>This is an error</p>
-          <span className={classes.register}>
+          <span>
             Don't have an account? <br />
             <Link to='/signup'>Register</Link>
           </span>

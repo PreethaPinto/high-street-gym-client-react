@@ -1,6 +1,6 @@
 import { useLoaderData, json, Link } from 'react-router-dom';
 
-import classes from './Trainers.module.css';
+import classes from './Trainers.module.scss';
 import { useState } from 'react';
 
 const TrainersPage = () => {

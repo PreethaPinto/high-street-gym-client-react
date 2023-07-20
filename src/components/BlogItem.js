@@ -3,7 +3,7 @@ import BlogMenu from './BlogMenu';
 
 import Edit from '../assets/edit.png';
 import Delete from '../assets/delete.png';
-import classes from './BlogItem.module.css';
+import classes from './BlogItem.module.scss';
 
 const BlogItem = ({ data }) => {
   const [{ blog_title, blog_content, blog_image }] = data;
@@ -37,10 +37,6 @@ const BlogItem = ({ data }) => {
         </div>
         <BlogMenu />
       </div>
-
-      {/* <h3>{blog_title}</h3>
-      <p>{blog_content}</p>
-      <img src={blog_image} style={{ width: '700px' }} alt='' /> */}
     </>
   );
 };

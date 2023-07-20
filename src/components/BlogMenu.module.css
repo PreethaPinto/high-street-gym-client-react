@@ -4,36 +4,31 @@
   flex-direction: column;
   gap: 25px;
 }
-
 .blog-menu h1 {
   font-size: 20px;
   color: grey;
 }
-
-.blog-post {
+.blog-menu h2 {
+  color: grey;
+}
+.blog-menu .blog-post {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-
-.blog-post img {
+.blog-menu .blog-post img {
   width: 100%;
   height: 200px;
 }
-
-.blog-menu h2 {
-  color: grey;
-}
-
-.blog-menu button {
+.blog-menu .blog-post button {
+  width: -moz-max-content;
   width: max-content;
   padding: 7.5px 15px;
   border: none;
   cursor: pointer;
   background-color: orangered;
-  color: grey;
-
-  &:hover {
-    background-color: black;
-  }
+  color: rgb(193, 193, 193);
 }
+.blog-menu .blog-post button:hover {
+  background-color: grey;
+}/*# sourceMappingURL=BlogMenu.module.css.map */

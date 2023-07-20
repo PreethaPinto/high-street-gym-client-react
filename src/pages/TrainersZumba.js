@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-import classes from './TrainersClasses.module.css';
+import classes from './TrainersClasses.module.scss';
 
 const TrainersZumba = (props) => {
   const location = useLocation();

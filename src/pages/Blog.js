@@ -1,29 +1,27 @@
 import { json, useLoaderData, Link } from 'react-router-dom';
 
-import classes from './Blog.module.css';
+import classes from './Blog.module.scss';
 
 const BlogPage = () => {
   const blogs = useLoaderData();
   console.log(blogs);
 
   return (
-    <div className={classes['blogs-home']}>
-      <div className={classes.blogs}>
-        {blogs.map((blog) => (
-          <div className={classes.blog} key={blog.blog_id}>
-            <div className={classes['blog-img']}>
-              <img src={blog.blog_image} alt='' />
-            </div>
-            <div className={classes.container}>
-              <Link to={`${blog.blog_id}`} className={classes['blog-link']}>
-                <h1 className={classes['blog-title']}>{blog.blog_title}</h1>
-              </Link>
-              <p className={classes['blog-content']}>{blog.blog_content}</p>
-              <button className={classes['blog-button']}>Read More</button>
-            </div>
+    <div className={classes.blogs}>
+      {blogs.map((blog) => (
+        <div className={classes.blog} key={blog.blog_id}>
+          <div className={classes['blog-img']}>
+            <img src={blog.blog_image} alt='' />
           </div>
-        ))}
-      </div>
+          <div className={classes.container}>
+            <Link to={`${blog.blog_id}`} className={classes['blog-link']}>
+              <h1>{blog.blog_title}</h1>
+            </Link>
+            <p className={classes['blog-content']}>{blog.blog_content}</p>
+            <button className={classes['blog-button']}>Read More</button>
+          </div>
+        </div>
+      ))}
     </div>
   );
 

@@ -1,4 +1,4 @@
-import classes from './About.module.css';
+import classes from './About.module.scss';
 
 const AboutPage = () => {
   return (

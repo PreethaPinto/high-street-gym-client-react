@@ -1,0 +1,29 @@
+@import '../styles/variables';
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid $secondary-color;
+  border-radius: 10px;
+  height: 150px;
+  width: 600px;
+  padding: 0 40px;
+  margin: 50px auto 20px;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      margin: 20px;
+    }
+  }
+
+  button {
+    height: 30px;
+    width: 70px;
+    align-self: center;
+    cursor: pointer;
+  }
+}

@@ -1,6 +1,6 @@
 import { useLoaderData, json } from 'react-router-dom';
 
-import classes from './Classes.module.css';
+import classes from './Classes.module.scss';
 
 const ClassesPage = (props) => {
   const classesList = useLoaderData();

@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
-import classes from './MainNavigation.module.css';
-import NewsletterPage from '../../src/pages/Newsletter';
+import classes from './MainNavigation.module.scss';
 
 const MainNavigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -91,7 +90,7 @@ const MainNavigation = () => {
             setMenuOpen(false);
           }}
         >
-          <button className={classes['btn-header']}>MEMBER LOGIN</button>
+          <button }>MEMBER LOGIN</button>
         </NavLink> */}
         {/* <NavLink
           to='/signup'
@@ -99,11 +98,9 @@ const MainNavigation = () => {
             setMenuOpen(false);
           }}
         >
-          <button className={classes['btn-header']}>BECOME A MEMBER</button>
+          <button }>BECOME A MEMBER</button>
         </NavLink> */}
       </ul>
-
-      {/* <NewsletterPage /> */}
     </nav>
   );
 };

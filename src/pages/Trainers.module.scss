@@ -1,3 +1,5 @@
+@import '../styles/variables';
+
 .trainer-wrapper {
   display: flex;
   flex-direction: column;
@@ -7,12 +9,12 @@
 
 .gym-class {
   margin: 20px;
-  border: 1px solid grey;
+  border: 1px solid $secondary-color;
   border-radius: 10px;
-  color: rgb(193, 193, 193);
+  color: $font-color;
   text-decoration: none;
   width: 400px;
   height: 100px;
   text-align: center;
   padding-top: 40px;
-}/*# sourceMappingURL=Trainers.module.css.map */
+}

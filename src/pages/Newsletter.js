@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import classes from './Newsletter.module.css';
+import classes from './Newsletter.module.scss';
 
 const NewsletterPage = () => {
   const [inputValue, setInputValue] = useState('');
@@ -51,9 +51,7 @@ const NewsletterPage = () => {
             <span className={classes['error-message']}>{error.inputValue}</span>
           )}
 
-          <button type='submit' className={classes.newsBtn}>
-            Sign up!
-          </button>
+          <button type='submit'>Sign up!</button>
         </div>
       </form>
     </>

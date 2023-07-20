@@ -1,0 +1,56 @@
+@import '../styles/variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  h2 {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+
+  Form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $background-color;
+    width: 500px;
+    height: 600px;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  input {
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid $secondary-color;
+    width: 300px;
+  }
+
+  button {
+    padding: 10px;
+    width: 100px;
+    border: none;
+    cursor: pointer;
+    background-color: $primary-color;
+    color: $font-color;
+  }
+
+  p {
+    font-size: 14px;
+    color: red;
+  }
+
+  span {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  link {
+    text-align: center;
+  }
+}

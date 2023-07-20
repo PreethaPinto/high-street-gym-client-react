@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-import classes from './TrainersClasses.module.css';
+import classes from './TrainersClasses.module.scss';
 
 const TrainersAbs = () => {
   const location = useLocation();
@@ -16,7 +16,7 @@ const TrainersAbs = () => {
             <li>{trainer.classes_taught}</li>
             <li>{trainer.email_id}</li>
           </ul>
-          <button className={classes['trainer-button']}>Book</button>
+          <button>Book</button>
         </div>
       ))}
     </>

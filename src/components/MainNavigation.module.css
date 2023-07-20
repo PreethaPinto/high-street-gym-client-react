@@ -5,46 +5,33 @@ nav {
   align-items: center;
   color: grey;
   padding: 0 50px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgb(0, 0, 0);
 }
-
 nav .logo {
   font-weight: 700;
-  color: #ff4500;
+  color: orangered;
   text-decoration: none;
   font-size: 1.2rem;
 }
-
-.logo-initials {
+nav .logo-initials {
   display: none;
 }
-
 nav ul {
   display: flex;
 }
-
 nav ul li {
   list-style: none;
   padding: 10px;
 }
-
-ul a {
+nav ul a {
   text-decoration: none;
   color: grey;
   cursor: pointer;
   margin: 0 10px;
 }
-
-ul a:hover,
-ul a.active {
+nav ul a:hover,
+nav ul a.active {
   color: orangered;
-}
-
-.btn-header {
-  color: #e7e7e7;
-  background-color: orangered;
-  padding: 10px;
-  cursor: pointer;
 }
 nav .burger {
   position: absolute;
@@ -56,55 +43,53 @@ nav .burger {
   width: 2.25rem;
   height: 2rem;
 }
-
 nav .burger span {
   height: 0.3rem;
   width: 100%;
-  background-color: white;
+  background-color: orangered;
   border-radius: 0.2rem;
+}
+nav button {
+  color: rgb(193, 193, 193);
+  background-color: orangered;
+  padding: 10px;
+  cursor: pointer;
 }
 
 @media (max-width: 600px) {
-  .logo-name {
-    display: none;
-  }
-
-  .logo-initials {
-    display: block;
-  }
-
-  nav .burger {
-    display: flex;
-  }
-
   nav {
     flex-direction: column;
     align-items: start;
   }
-
+  nav .logo-name {
+    display: none;
+  }
+  nav .logo-initials {
+    display: block;
+  }
+  nav .burger {
+    display: flex;
+    color: orangered;
+  }
   nav ul {
     display: none;
     flex-direction: column;
     width: 100%;
     margin-bottom: 0.25rem;
   }
-
-  nav ul.open {
-    display: flex;
+  nav ul a,
+  nav ul button {
+    margin: 0.2rem 0.5rem;
+    align-self: center;
   }
-
   nav ul li {
     text-align: center;
     width: 100%;
   }
-
-  .btn-header {
+  nav ul.open {
+    display: flex;
+  }
+  nav .btn-header {
     text-align: center;
   }
-
-  nav ul a,
-  button {
-    margin: 0.2rem 0.5rem;
-    align-self: center;
-  }
-}
+}/*# sourceMappingURL=MainNavigation.module.css.map */
