@@ -1,0 +1,65 @@
+.write {
+  margin: 100px;
+  display: flex;
+  gap: 20px;
+}
+.write .content {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 30px 0 0 30px;
+}
+.write .content input {
+  padding: 10px;
+  border: 1px solid grey;
+}
+.write .content .editor-container {
+  height: 400px;
+}
+.write .content .editor {
+  height: 100%;
+}
+.write .menu {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.write .item {
+  border: 1px solid grey;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: rgb(193, 193, 193);
+  margin: 30px;
+}
+.write .item span,
+.write .item label,
+.write .item .buttons {
+  padding: 10px;
+}
+.write .item h1 {
+  font-size: 20px;
+  padding-left: 10px;
+}
+.write .item .file {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.write .item .buttons {
+  display: flex;
+  gap: 20px;
+}
+.write .item .buttons :first-child {
+  cursor: pointer;
+  color: rgb(193, 193, 193);
+  background-color: grey;
+  padding: 8px 7px;
+}
+.write .item .buttons :last-child {
+  cursor: pointer;
+  color: rgb(193, 193, 193);
+  background-color: orangered;
+  padding: 8px 10px;
+}/*# sourceMappingURL=Write.module.css.map */
