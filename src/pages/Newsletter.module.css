@@ -1,40 +1,38 @@
 .newsletter {
   display: flex;
   flex-direction: column;
-  background-color: #ff4500;
+  background-color: rgba(255, 255, 255, 0.1);
   height: 150px;
   width: 30%;
   margin: auto;
   border-radius: 20px;
-
-  label {
-    margin: 20px;
-    font-size: 1.8rem;
-    text-align: center;
-  }
-
-  .news-signup {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  input {
-    align-self: center;
-    width: 50%;
-    background: #939393;
-    height: 30px;
-    border-radius: 10px;
-  }
-
-  button {
-    align-self: center;
-    width: 150px;
-    margin: 10px;
-    height: 30px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+  color: orangered;
+}
+.newsletter label {
+  margin: 20px;
+  font-size: 1.8rem;
+  text-align: center;
+}
+.newsletter .news-signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.newsletter input {
+  align-self: center;
+  width: 50%;
+  background: #939393;
+  height: 30px;
+  border-radius: 10px;
+}
+.newsletter button {
+  align-self: center;
+  width: 150px;
+  margin: 10px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: orangered;
 }
 
 .success {
@@ -50,4 +48,4 @@
 .success h2 {
   text-align: center;
   padding-top: 40px;
-}
+}/*# sourceMappingURL=Newsletter.module.css.map */

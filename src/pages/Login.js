@@ -69,7 +69,7 @@ export const loginAction = async ({ request }) => {
       body: JSON.stringify(loginData),
     });
 
-    const { username, password } = loginData;
+    //const { username, password } = loginData;
 
     if (!response.ok) {
       throw json({ message: 'Could not login' }, { status: 500 });

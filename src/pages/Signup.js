@@ -92,8 +92,8 @@ const SignupPage = () => {
 
 export default SignupPage;
 
-const xmlbuilder = require('xmlbuilder');
-const fetch = require('node-fetch');
+// const xmlbuilder = require('xmlbuilder');
+// const fetch = require('node-fetch');
 
 export const signupAction = async ({ request }) => {
   const data = await request.formData();
@@ -108,21 +108,38 @@ export const signupAction = async ({ request }) => {
   };
   console.log(signupData);
 
-  // Convert the signupData object to XML format
-  const xmlData = xmlbuilder.create('signupData');
-  for (const [key, value] of Object.entries(signupData)) {
-    xmlData.ele(key, value);
-  }
-  const xmlString = xmlData.end({ pretty: true });
+  //   // Convert the signupData object to XML format
+  //   const xmlData = xmlbuilder.create('signupData');
+  //   for (const [key, value] of Object.entries(signupData)) {
+  //     xmlData.ele(key, value);
+  //   }
+  //   const xmlString = xmlData.end({ pretty: true });
 
-  console.log(xmlString);
+  //   console.log(xmlString);
+
+  //   const response = await fetch('http://localhost:8080/signup', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/xml',
+  //     },
+  //     body: xmlString,
+  //   });
+
+  //   if (response.status === 400) {
+  //     return response;
+  //   }
+
+  //   if (!response.ok) {
+  //     throw json({ message: 'Could not submit form' }, { status: 500 });
+  //   }
+  // };
 
   const response = await fetch('http://localhost:8080/signup', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/xml',
+      'Content-Type': 'application/json',
     },
-    body: xmlString,
+    body: JSON.stringify(signupData),
   });
 
   if (response.status === 400) {
@@ -133,20 +150,3 @@ export const signupAction = async ({ request }) => {
     throw json({ message: 'Could not submit form' }, { status: 500 });
   }
 };
-
-//   const response = await fetch('http://localhost:8080/signup', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(signupData),
-//   });
-
-//   if (response.status === 400) {
-//     return response;
-//   }
-
-//   if (!response.ok) {
-//     throw json({ message: 'Could not submit form' }, { status: 500 });
-//   }
-// };

@@ -1,0 +1,57 @@
+@import '../styles/variables';
+
+.newsletter {
+  display: flex;
+  flex-direction: column;
+  background-color: $background-color;
+  height: 150px;
+  width: 30%;
+  margin: auto;
+  border-radius: 20px;
+  color: $primary-color;
+
+  label {
+    margin: 20px;
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .news-signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  input {
+    align-self: center;
+    width: 50%;
+    background: #939393;
+    height: 30px;
+    border-radius: 10px;
+  }
+
+  button {
+    align-self: center;
+    width: 150px;
+    margin: 10px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: $primary-color;
+  }
+}
+
+.success {
+  display: flex;
+  flex-direction: column;
+  background-color: #ff4500;
+  height: 150px;
+  width: 30%;
+  margin: auto;
+  border-radius: 20px;
+}
+
+.success h2 {
+  text-align: center;
+  padding-top: 40px;
+}
