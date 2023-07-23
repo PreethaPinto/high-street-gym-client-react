@@ -21,7 +21,6 @@ import TrainersPilates from './pages/TrainersPilates';
 import TrainersBoxing from './pages/TrainersBoxing';
 import TrainersAbs from './pages/TrainersAbs';
 import Write from './pages/Write';
-import Footer from './components/Footer';
 
 const App = () => {
   const router = createBrowserRouter([

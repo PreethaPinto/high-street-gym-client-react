@@ -1,5 +1,7 @@
 import { useLoaderData, json } from 'react-router-dom';
 
+import axios from 'axios';
+
 import classes from './Classes.module.scss';
 
 const ClassesPage = (props) => {
@@ -33,13 +35,10 @@ const ClassesPage = (props) => {
 export default ClassesPage;
 
 export const classesLoader = async () => {
-  const response = await fetch('http://localhost:8080/classes');
-
-  if (!response.ok) {
-    throw json({ message: 'Could not fetch classes' }, { status: 500 });
-  } else {
-    const responseData = await response.json();
-    console.log(responseData);
-    return responseData;
+  try {
+    const response = await axios.get('http://localhost:8080/classes');
+    return response.data;
+  } catch (err) {
+    return err;
   }
 };

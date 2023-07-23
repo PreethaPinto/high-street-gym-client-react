@@ -1,8 +1,16 @@
-import { Link, Form, json, useActionData } from 'react-router-dom';
+import {
+  Link,
+  Form,
+  json,
+  useActionData,
+  useNavigate,
+  redirect,
+} from 'react-router-dom';
 
 import classes from './RegisterSignup.module.scss';
 
 const SignupPage = () => {
+  const navigate = useNavigate();
   const data = useActionData();
 
   return (
@@ -149,4 +157,5 @@ export const signupAction = async ({ request }) => {
   if (!response.ok) {
     throw json({ message: 'Could not submit form' }, { status: 500 });
   }
+  redirect();
 };

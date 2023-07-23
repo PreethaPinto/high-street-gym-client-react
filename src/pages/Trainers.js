@@ -2,6 +2,7 @@ import { useLoaderData, json, Link } from 'react-router-dom';
 
 import classes from './Trainers.module.scss';
 import { useState } from 'react';
+import axios from 'axios';
 
 const TrainersPage = () => {
   const trainers = useLoaderData();
@@ -100,13 +101,10 @@ const TrainersPage = () => {
 export default TrainersPage;
 
 export const trainersLoader = async () => {
-  const response = await fetch('http://localhost:8080/trainers');
-
-  if (!response.ok) {
-    throw json({ message: 'Could not fetch trainers' }, { status: 500 });
-  } else {
-    const responseData = await response.json();
-    console.log(responseData);
-    return responseData;
+  try {
+    const response = await axios.get('http://localhost:8080/trainers');
+    return response.data;
+  } catch (err) {
+    return err;
   }
 };

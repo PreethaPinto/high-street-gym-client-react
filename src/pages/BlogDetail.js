@@ -4,6 +4,7 @@ import BlogItem from '../components/BlogItem';
 
 const BlogDetailPage = () => {
   const data = useLoaderData();
+  console.log(data);
 
   return <BlogItem data={data} />;
 };
