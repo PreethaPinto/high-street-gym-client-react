@@ -1,0 +1,37 @@
+@import '../styles/variables';
+
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px $secondary-color solid;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 200px;
+  padding: 50px;
+  background-color: $background-color;
+
+  h1 {
+    color: $primary-color;
+  }
+
+  p {
+    font-size: 18px;
+    margin-bottom: 50px;
+  }
+
+  button {
+    background-color: $primary-color;
+    padding: 8px;
+    width: 250px;
+    cursor: pointer;
+  }
+
+  .return {
+    font-size: 15px;
+    text-decoration: none;
+    color: white;
+  }
+}
