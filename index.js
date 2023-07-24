@@ -1,7 +1,7 @@
 const express = require('express');
 const router = require('express').Router();
 const jwt = require('jsonwebtoken');
-const { body, validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -132,65 +132,60 @@ app.get('/blogs', (req, res) => {
 });
 
 //Http GET for blog detail page
-// app.get('/blogs/:id', (req, res) => {
-//   //connect to database
-//   try {
-//     const id = req.params.id;
-//     sql.connect(sqlConfig, (err) => {
-//       if (err) {
-//         console.log(err);
-//         return;
-//       }
+app.get('/blogs/:id', (req, res) => {
+  //connect to database
+  try {
+    const id = req.params.id;
+    sql.connect(sqlConfig, (err) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
 
-//       //create Request object
-//       let request = new sql.Request();
+      //create Request object
+      let request = new sql.Request();
 
-//       let stringRequest = `Select * from blog where blog_id = ${id}`;
+      let stringRequest = `Select * from blog where blog_id = ${id}`;
 
-//       request.query(stringRequest, (err, data) => {
-//         if (err) {
-//           res.status(500);
-//           res.send(err);
-//         }
-//         res.send(data.recordset);
-//         console.log(data.recordset);
-//       });
-//     });
-//   } catch (err) {
-//     res.send(err);
-//   }
-// });
+      request.query(stringRequest, (err, data) => {
+        if (err) {
+          res.status(500);
+          res.send(err);
+        }
+        res.send(data.recordset);
+        console.log(data.recordset);
+      });
+    });
+  } catch (err) {
+    res.send(err);
+  }
+});
 
 const userDataValidate = [
-  body('first_name').notEmpty().withMessage('First name is required'),
-  body('last').notEmpty().withMessage('Last name is required'),
-  body('phone').custom((value) => {
-    if (value.length !== 10) {
-      throw new Error('Phone number should be 10 digits');
-    } else {
-      return true;
-    }
-  }),
-  body('email_id')
+  check('first_name').notEmpty().withMessage('First name is required'),
+  check('last_name').notEmpty().withMessage('Last name is required'),
+  check('phone_number')
+    .isLength({
+      min: 10,
+      max: 10,
+    })
     .notEmpty()
-    .withMessage('Email is required')
-    .isEmail()
-    .withMessage('Invalid email address'),
-  body('password')
-    .notEmpty()
-    .withMessage('Password is required')
-    .isLength({ min: 6, max: 10 }),
-  body('username').notEmpty().withMessage('Username is required'),
-  body('confirm_password').custom((value, { req }) => {
-    if (value !== req.body.password) {
-      throw new Error('Passwords must match');
-    }
-    return true;
+    .withMessage('Phone number is required'),
+  check('email_id').isEmail().withMessage('Email is required'),
+  check('username').notEmpty().withMessage('Username is required'),
+  check('password', 'Password length should be 8 to 20 characters').isLength({
+    min: 8,
+    max: 20,
   }),
 ];
 
-app.post('/signup', async (req, res) => {
+app.post('/signup', userDataValidate, async (req, res) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const {
       first_name,
       last_name,
@@ -252,6 +247,71 @@ app.post('/signup', async (req, res) => {
     console.error('Error processing the request:', err);
     res.status(500).json({ error: 'Internal Server Error' });
   }
+});
+
+app.post('/login', async (req, res) => {
+  try {
+    // const { username, password } = req.body;
+
+    // Connect to the database
+    const pool = await sql.connect(sqlConfig);
+
+    // Prepare the SQL query with parameterized query
+    const query = `SELECT * FROM member WHERE username = @username`;
+    const result = await pool
+      .request()
+      .input('username', sql.NVarChar, req.body.username)
+      .query(query);
+
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ message: 'User not found!' });
+    }
+
+    const user = result.recordset[0];
+    const isPasswordValid = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'Wrong username or password!' });
+    }
+
+    const { password, ...other } = user;
+    // Generate and sign the JWT token
+    const token = jwt.sign({ id: user.member_id }, 'JWT_SECRET', {
+      expiresIn: '1h',
+    });
+
+    res
+      .cookie('token', token, {
+        httpOnly: true,
+      })
+      .status(200)
+      .json({ other, token });
+
+    //return res.redirect('/');
+
+    // res.json({
+    //   // username: user.username,
+    //   accessToken,
+    // });
+  } catch (err) {
+    console.error('Error:', err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.post('/logout', (req, res) => {
+  try {
+  } catch (err) {
+    console.log('Error: ', err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.listen(port, function () {
+  console.log(`Listening to port ${port}`);
 });
 
 //
@@ -327,70 +387,3 @@ app.post('/signup', async (req, res) => {
 //     res.send(err);
 //   }
 // });
-
-app.post('/login', async (req, res) => {
-  try {
-    // const { username, password } = req.body;
-
-    // Connect to the database
-    const pool = await sql.connect(sqlConfig);
-
-    // Prepare the SQL query with parameterized query
-    const query = `SELECT * FROM member WHERE username = @username`;
-    const result = await pool
-      .request()
-      .input('username', sql.NVarChar, req.body.username)
-      .query(query);
-
-    if (result.recordset.length === 0) {
-      return res.status(404).json({ message: 'User not found!' });
-    }
-
-    const user = result.recordset[0];
-    const isPasswordValid = await bcrypt.compare(
-      req.body.password,
-      user.password
-    );
-
-    if (!isPasswordValid) {
-      return res
-        .status(401)
-        .json({ message: 'Wrong username/password combination!' });
-    }
-
-    const { password, ...other } = user;
-    // Generate and sign the JWT token
-    const token = jwt.sign({ id: user.member_id }, 'JWT_SECRET', {
-      expiresIn: '1h',
-    });
-
-    res
-      .cookie('token', token, {
-        httpOnly: true,
-      })
-      .status(200)
-      .json({ other, token });
-
-    return res.redirect('/');
-
-    // res.json({
-    //   // username: user.username,
-    //   accessToken,
-    // });
-  } catch (err) {
-    console.error('Error:', err);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
-
-app.post('/logout', (req, res) => {
-  try {
-  } catch (err) {
-    console.log('Error: ', err);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
-
-app.listen(port, function () {
-  console.log(`Listening to port ${port}`);
-});
