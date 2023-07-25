@@ -1,6 +1,5 @@
-import { blogLoader } from '../pages/Blog';
 import { useState, useEffect } from 'react';
-
+import axios from 'axios';
 import classes from './BlogMenu.module.scss';
 
 const BlogMenu = () => {
@@ -9,9 +8,22 @@ const BlogMenu = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const blogData = await blogLoader();
-        console.log(blogData);
-        setBlogs(blogData);
+        const response = await axios.get('http://localhost:8080/blogs');
+        const responseData = response.data;
+
+        let loadedBlogMenu = [];
+
+        for (const key in responseData) {
+          loadedBlogMenu.push({
+            blog_id: responseData[key].blog_id,
+            blog_title: responseData[key].blog_title,
+            blog_content: responseData[key].blog_content,
+            blog_image: responseData[key].blog_image,
+            date: responseData[key].date,
+          });
+        }
+
+        setBlogs(loadedBlogMenu);
       } catch (err) {
         console.log('Error fetching blogs', Error);
       }
