@@ -21,16 +21,16 @@ app.use(cookieParser());
 
 require('dotenv').config();
 
-const requireAuth = (req, res, next) => {
-  const token = req.cookies.jwt;
+// const requireAuth = (req, res, next) => {
+//   const token = req.cookies.jwt;
 
-  //check json web token exists and is verified
-  if (token) {
-    jwt.verify(token);
-  } else {
-    res.redirect('./login');
-  }
-};
+//   //check json web token exists and is verified
+//   if (token) {
+//     jwt.verify(token);
+//   } else {
+//     res.redirect('./login');
+//   }
+// };
 
 //config for database
 const sqlConfig = {
@@ -138,14 +138,15 @@ app.get('/blogs/:id', (req, res) => {
     const id = req.params.id;
     sql.connect(sqlConfig, (err) => {
       if (err) {
-        console.log(err);
         return;
       }
 
       //create Request object
       let request = new sql.Request();
 
-      let stringRequest = `Select * from blog where blog_id = ${id}`;
+      let stringRequest = `SELECT m.username, b.blog_title, b.blog_content, b.blog_image, b.date
+                          FROM member m
+                          INNER JOIN blog b ON m.member_id = b.member_id WHERE b.blog_id = ${id}`;
 
       request.query(stringRequest, (err, data) => {
         if (err) {
@@ -153,7 +154,6 @@ app.get('/blogs/:id', (req, res) => {
           res.send(err);
         }
         res.send(data.recordset);
-        console.log(data.recordset);
       });
     });
   } catch (err) {
@@ -161,16 +161,49 @@ app.get('/blogs/:id', (req, res) => {
   }
 });
 
+// //delete for blog post
+// app.delete('/blogs', (req, res) => {
+
+//     //connect to database
+//   sql.connect(sqlConfig, (err) => {
+//       const id = request.params.id
+//       if (err) {
+//         console.log(err);
+//         return;
+//       }
+
+//       //create Request object
+//       const token = req.cookies.token
+//       if (!token) return res.status(401).json('Not authenticated!')
+
+//       jwt.verify(token, 'JWT_SECRET', (err, userInfo) => {
+//         if (err) return res.status(403).json('Token is not valid!'))
+
+//         const request = new sql.Request();
+//       const stringRequest = 'DELETE FROM posts WHERE member_id = ? AND blog_id = ?'
+//       request.query(stringRequest, (err, data) => {
+//         if (err) {
+//           res.status(500);
+//           res.send(err);
+//         }
+//         res.send(data.recordset);
+//       });
+//     });
+
+// });
+
+//Validation for sign up
 const userDataValidate = [
   check('first_name').notEmpty().withMessage('First name is required'),
   check('last_name').notEmpty().withMessage('Last name is required'),
   check('phone_number')
+    .notEmpty()
+    .withMessage('Phone number should be 10 digits')
     .isLength({
       min: 10,
       max: 10,
-    })
-    .notEmpty()
-    .withMessage('Phone number is required'),
+    }),
+
   check('email_id').isEmail().withMessage('Email is required'),
   check('username').notEmpty().withMessage('Username is required'),
   check('password', 'Password length should be 8 to 20 characters').isLength({
@@ -179,6 +212,7 @@ const userDataValidate = [
   }),
 ];
 
+//POST for signup
 app.post('/signup', userDataValidate, async (req, res) => {
   try {
     const errors = validationResult(req);
@@ -249,6 +283,7 @@ app.post('/signup', userDataValidate, async (req, res) => {
   }
 });
 
+//POST for login
 app.post('/login', async (req, res) => {
   try {
     // const { username, password } = req.body;
@@ -290,18 +325,22 @@ app.post('/login', async (req, res) => {
       .status(200)
       .json({ other, token });
 
-    //return res.redirect('/');
-
-    // res.json({
-    //   // username: user.username,
-    //   accessToken,
-    // });
+    const logout = (req, res) => {
+      res
+        .clearCookie('token', {
+          sameSite: 'none',
+          secure: true,
+        })
+        .status(200)
+        .json('User has been logged out');
+    };
   } catch (err) {
     console.error('Error:', err);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
 
+//POST for logout
 app.post('/logout', (req, res) => {
   try {
   } catch (err) {
@@ -310,80 +349,7 @@ app.post('/logout', (req, res) => {
   }
 });
 
+//port listen
 app.listen(port, function () {
   console.log(`Listening to port ${port}`);
 });
-
-//
-
-// app.post('/signup', async (req, res) => {
-//   try {
-//     const {
-//       first_name,
-//       last_name,
-//       phone_number,
-//       email_id,
-//       password,
-//       username,
-//     } = req.body;
-
-//     // Convert the signup data to XML format
-//     const xmlData = xml({
-//       member: {
-//         first_name,
-//         last_name,
-//         phone_number,
-//         email_id,
-//         password,
-//         username,
-//       },
-//     }).end({ pretty: true });
-
-//     // Replace sqlConfig with your actual SQL Server configuration
-//     sql.connect(sqlConfig, (err) => {
-//       if (err) {
-//         console.log('There was an error connecting to the database', err);
-//         return res.status(500).json({ error: 'Internal Server Error' });
-//       }
-
-//       const request = new sql.Request();
-
-//       const stringRequest = `
-//         INSERT INTO [member] (
-//           first_name,
-//           last_name,
-//           phone_number,
-//           email_id,
-//           password,
-//           username
-//         )
-//         OUTPUT Inserted.member_id
-//         VALUES (
-//           @first_name,
-//           @last_name,
-//           @phone_number,
-//           @email_id,
-//           @password,
-//           @username
-//         )`;
-
-//       request.input('first_name', first_name);
-//       request.input('last_name', last_name);
-//       request.input('phone_number', phone_number);
-//       request.input('email_id', email_id);
-//       request.input('password', password);
-//       request.input('username', username);
-
-//       request.query(stringRequest, (err, data) => {
-//         if (err) {
-//           console.log('There was an error executing the query', err);
-//           return res.status(500).json({ error: 'Internal Server Error' });
-//         }
-
-//         res.send(data);
-//       });
-//     });
-//   } catch (err) {
-//     res.send(err);
-//   }
-// });
