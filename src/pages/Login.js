@@ -1,11 +1,35 @@
-import { Link, Form, json, useActionData } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, useContext } from 'react';
 
 import classes from './RegisterSignup.module.scss';
+import { AuthContext } from '../context/AuthContext';
 
 const LoginPage = () => {
-  const data = useActionData();
+  const [inputs, setInputs] = useState({
+    username: '',
+    password: '',
+  });
+
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  const { login } = useContext(AuthContext);
+
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await login(inputs);
+      navigate('/');
+    } catch (err) {
+      setError(err.response.data);
+    }
+  };
+
   const userRef = useRef();
 
   useEffect(() => {
@@ -13,73 +37,37 @@ const LoginPage = () => {
   }, []);
 
   return (
-    <>
-      {/* {success ? (
-        <Navigate to='/'></Navigate>
-      ) : ( */}
-      <div className={classes.container}>
-        <h1>LOGIN</h1>
-        <Form method='post'>
-          <input
-            type='text'
-            id='username'
-            name='username'
-            placeholder='Username'
-            ref={userRef}
-          />
+    <div className={classes.container}>
+      <h1>LOGIN</h1>
+      <form method='post' onSubmit={handleSubmit}>
+        <input
+          type='text'
+          id='username'
+          name='username'
+          placeholder='Username'
+          ref={userRef}
+          onChange={handleChange}
+        />
 
-          <input
-            type='text'
-            id='password'
-            placeholder='Password'
-            name='password'
-            // onChange={(event) =>
-            //   inputChangeHandler('password', event.target.value)
-            // }
-          />
+        <input
+          type='text'
+          id='password'
+          placeholder='Password'
+          name='password'
+          onChange={handleChange}
+        />
 
-          <button type='submit'>Login</button>
-          <p>This is an error</p>
-          <span>
-            Don't have an account? <br />
-            <Link to='/signup'>Register</Link>
-          </span>
-        </Form>
-      </div>
-    </>
+        {error && <p>Invalid username or password</p>}
+
+        <button type='submit'>Login</button>
+
+        <span>
+          Don't have an account? <br />
+          <Link to='/signup'>Register</Link>
+        </span>
+      </form>
+    </div>
   );
 };
 
 export default LoginPage;
-
-export const loginAction = async ({ request }) => {
-  try {
-    const data = await request.formData();
-
-    const loginData = {
-      username: data.get('username'),
-      password: data.get('password'),
-    };
-
-    const response = await fetch('http://localhost:8080/login', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(loginData),
-    });
-
-    //const { username, password } = loginData;
-
-    if (!response.ok) {
-      throw json({ message: 'Could not login' }, { status: 500 });
-    }
-
-    const responseData = await response.json();
-
-    console.log(responseData);
-  } catch (err) {
-    console.log('Error:', err);
-    // Handle the error as needed
-  }
-};
