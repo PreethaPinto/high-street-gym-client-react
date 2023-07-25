@@ -32,3 +32,11 @@
   background: orangered;
   color: #fff;
 }
+
+.back {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  color: $primary-color;
+  font-size: 18px;
+}

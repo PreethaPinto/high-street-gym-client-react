@@ -4,11 +4,12 @@ import axios from 'axios';
 
 import classes from './Classes.module.scss';
 
-const ClassesPage = (props) => {
+const ClassesPage = () => {
   const classesList = useLoaderData();
 
   return (
     <>
+      <h2>Classes Available</h2>
       <table>
         <tbody>
           {classesList.map((item, index) => {

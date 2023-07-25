@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 import classes from './MainNavigation.module.scss';
 
 const MainNavigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { currentUser, logout } = useContext(AuthContext);
 
   return (
     <nav>
@@ -80,26 +82,27 @@ const MainNavigation = () => {
             WRITE
           </NavLink>
         </li>
-        <li>John</li>
+        <li>{currentUser?.usename}</li>
         <li>
-          <NavLink>Logout</NavLink>
+          {currentUser ? (
+            <button onClick={logout}>Logout</button>
+          ) : (
+            <>
+              <NavLink to='/login' className={classes.link}>
+                <button>Login</button>
+              </NavLink>
+
+              <NavLink
+                to='/signup'
+                onClick={() => {
+                  setMenuOpen(false);
+                }}
+              >
+                <button>BECOME A MEMBER</button>
+              </NavLink>
+            </>
+          )}
         </li>
-        {/* <NavLink
-          to='/login'
-          onClick={() => {
-            setMenuOpen(false);
-          }}
-        >
-          <button }>MEMBER LOGIN</button>
-        </NavLink> */}
-        {/* <NavLink
-          to='/signup'
-          onClick={() => {
-            setMenuOpen(false);
-          }}
-        >
-          <button }>BECOME A MEMBER</button>
-        </NavLink> */}
       </ul>
     </nav>
   );

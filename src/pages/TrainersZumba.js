@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -41,6 +41,9 @@ const TrainersZumba = (props) => {
           <ToastContainer />
         </div>
       ))}
+      <Link to='/' className={classes.back}>
+        Return to Home
+      </Link>
     </>
   );
 };

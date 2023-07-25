@@ -1,14 +1,10 @@
 @import '../styles/variables';
 
-// /* .classesLoading {
-//   text-align: center;
-//   color: #e7e7e7;
-// }
-
-// .classesError {
-//   text-align: center;
-//   color: $font-color;
-// } */
+h2 {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0 50px 0;
+}
 
 table {
   border: 2px solid $secondary-color;
