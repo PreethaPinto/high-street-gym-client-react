@@ -83,7 +83,7 @@ const MainNavigation = () => {
           </NavLink>
         </li>
         <li>{currentUser?.usename}</li>
-        <li>
+        <li className={classes['nav-button']}>
           {currentUser ? (
             <button onClick={logout}>Logout</button>
           ) : (

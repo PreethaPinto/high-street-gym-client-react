@@ -30,15 +30,3 @@ table {
     background-color: black;
   }
 }
-
-@media (max-width: 600px) {
-  table tr {
-    display: block;
-
-    table tr td {
-      padding: 1.5rem;
-      text-align: center;
-      display: block;
-    }
-  }
-}

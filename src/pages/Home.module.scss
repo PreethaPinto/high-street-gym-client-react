@@ -5,3 +5,9 @@
   align-items: center;
   margin: auto;
 }
+
+@media (max-width: 600px) {
+  .welcome {
+    margin-top: 200px;
+  }
+}

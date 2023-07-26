@@ -1,10 +1,12 @@
-import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
 import classes from './TrainersClasses.module.scss';
+import { AuthContext } from '../context/AuthContext';
 
 const TrainersBoxing = () => {
+  const { currentUser } = useContext(AuthContext);
   const [disabled, setDisabled] = useState(false);
   const location = useLocation();
   const boxingTrainers = location.state.data;
@@ -29,16 +31,23 @@ const TrainersBoxing = () => {
             <li>{trainer.classes_taught}</li>
             <li>{trainer.email_id}</li>
           </ul>
-          <button
-            disabled={disabled}
-            className={classes['trainer-button']}
-            onClick={handleToastMessage}
-          >
-            Book
-          </button>
+          {currentUser ? (
+            <button disabled={disabled} onClick={handleToastMessage}>
+              Book
+            </button>
+          ) : (
+            <Link to='/login'>
+              <button style={{ height: '50px', width: '100px' }}>
+                Login to book
+              </button>
+            </Link>
+          )}
           <ToastContainer />
         </div>
       ))}
+      <Link to='/' className={classes.back}>
+        Return to Home
+      </Link>
     </>
   );
 };

@@ -37,9 +37,11 @@ const TrainersAbs = () => {
               Book
             </button>
           ) : (
-            <button style={{ height: '50px', width: '100px' }}>
-              Login to book
-            </button>
+            <Link to='/login'>
+              <button style={{ height: '50px', width: '100px' }}>
+                Login to book
+              </button>
+            </Link>
           )}
           <ToastContainer />
         </div>

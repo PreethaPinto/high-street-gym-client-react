@@ -40,3 +40,15 @@
   color: $primary-color;
   font-size: 18px;
 }
+
+@media (max-width: 600px) {
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid grey;
+    border-radius: 10px;
+    width: 500px;
+    margin: 50px 20px;
+  }
+}

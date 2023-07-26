@@ -32,11 +32,6 @@ const NewsletterPage = () => {
 
   return (
     <>
-      {/* {isSubmitted ? (
-        <div className={classes.success}>
-          <h2>Thank you for signing up!</h2>
-        </div>
-      ) : ( */}
       <form onSubmit={handleSubmit} className={classes.newsletter}>
         <label htmlFor='email'>Sign up for our newsletter!</label>
         <div className={classes['news-signup']}>
