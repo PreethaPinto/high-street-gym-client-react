@@ -9,17 +9,23 @@ import Edit from '../assets/edit.png';
 import Delete from '../assets/delete.png';
 import classes from './BlogItem.module.scss';
 
-const BlogItem = (props) => {
+const BlogItem = () => {
   const [blog, setBlog] = useState({});
-  //console.log(blog);
+  console.log(blog);
 
   const location = useLocation();
   const navigate = useNavigate();
 
   const blogId = location.pathname.split('/')[2];
 
+  const axiosInstance = axios.create({
+    baseURL: 'http://localhost:8080',
+    withCredentials: true, // Send cookies with the request
+    crossDomain: true, // Treat the request as cross-origin
+  });
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
+
+  //const currentUsername = currentUser.other.username;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,14 +45,13 @@ const BlogItem = (props) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete('/blogs/{blogId}');
+      await axiosInstance.delete(`http://localhost:8080/blogs/${blogId}`);
       navigate('/');
     } catch (err) {
-      return err;
+      console.log(err);
     }
   };
 
-  // const [{ blog_title, blog_content, blog_image }] = data;
   return (
     <>
       <div className={classes.single}>
@@ -61,9 +66,9 @@ const BlogItem = (props) => {
               <span>{blog.username}</span>
               <p>Posted {moment(blog.date).fromNow()}</p>
             </div>
-            {currentUser.other.username === blog.username && (
+            {currentUser?.details.username === blog.username && (
               <div className={classes['edit-blog']}>
-                <Link to={`write?edit=2`}>
+                <Link to={`/write?edit=2`} state={blog}>
                   <img src={Edit} alt='' />
                 </Link>
                 <img src={Delete} alt='' onClick={handleDelete} />
