@@ -9,26 +9,28 @@ const ClassesPage = () => {
 
   return (
     <>
-      <h2>Classes Available</h2>
-      <table>
-        <tbody>
-          {classesList.map((item, index) => {
-            return (
-              <tr key={index}>
-                <td data-title='day' className={classes.data}>
-                  {item.day}
-                </td>
-                <td data-title='class' className={classes.data}>
-                  {item.classes}
-                </td>
-                <td data-title='time' className={classes.data}>
-                  {item.time}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <h2 className={classes.available}>Classes Available</h2>
+      <div className={classes['class-table']}>
+        <table>
+          <tbody>
+            {classesList.map((item, index) => {
+              return (
+                <tr key={index}>
+                  <td data-title='day' className={classes.data}>
+                    {item.day}
+                  </td>
+                  <td data-title='class' className={classes.data}>
+                    {item.classes}
+                  </td>
+                  <td data-title='time' className={classes.data}>
+                    {item.time}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };

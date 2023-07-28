@@ -9,102 +9,117 @@ const MainNavigation = () => {
   const { currentUser, logout } = useContext(AuthContext);
 
   return (
-    <nav>
-      <Link to='/' className={classes.logo}>
-        <h2 className={classes['logo-name']}>HIGH STREET GYM</h2>
-        <h2 className={classes['logo-initials']}>HSG</h2>
-      </Link>
-      <div
-        className={classes.burger}
-        onClick={() => {
-          setMenuOpen(!menuOpen);
-        }}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <ul className={menuOpen ? classes.open : ''}>
-        <li>
-          <NavLink
-            to='/classes'
-            onClick={() => {
-              setMenuOpen(false);
-            }}
-            className={({ isActive }) =>
-              isActive ? classes.active : undefined
-            }
-          >
-            CLASSES
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/trainers'
-            className={({ isActive }) =>
-              isActive ? classes.active : undefined
-            }
-            onClick={() => {
-              setMenuOpen(false);
-            }}
-          >
-            TRAINERS
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/blogs'
-            className={({ isActive }) =>
-              isActive ? classes.active : undefined
-            }
-            onClick={() => {
-              setMenuOpen(false);
-            }}
-          >
-            BLOG
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/about'
-            className={({ isActive }) =>
-              isActive ? classes.active : undefined
-            }
-            onClick={() => {
-              setMenuOpen(false);
-            }}
-          >
-            ABOUT
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/write' onClick={() => setMenuOpen(false)}>
-            WRITE
-          </NavLink>
-        </li>
-        <li>{currentUser?.usename}</li>
-        <li className={classes['nav-button']}>
-          {currentUser ? (
-            <button onClick={logout}>Logout</button>
-          ) : (
-            <>
-              <NavLink to='/login' className={classes.link}>
-                <button>Login</button>
-              </NavLink>
+    <div className={classes.wrapper}>
+      <nav>
+        <Link to='/' className={classes.logo}>
+          <h2 className={classes['logo-name']}>HIGH STREET GYM</h2>
+          <h2 className={classes['logo-initials']}>HSG</h2>
+        </Link>
+        <div
+          className={classes.burger}
+          onClick={() => {
+            setMenuOpen(!menuOpen);
+          }}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul className={menuOpen ? classes.open : ''}>
+          <li>
+            <NavLink
+              to='/classes'
+              onClick={() => {
+                setMenuOpen(false);
+              }}
+              className={({ isActive }) =>
+                isActive ? classes.active : undefined
+              }
+            >
+              CLASSES
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to='/trainers'
+              className={({ isActive }) =>
+                isActive ? classes.active : undefined
+              }
+              onClick={() => {
+                setMenuOpen(false);
+              }}
+            >
+              TRAINERS
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to='/blogs'
+              className={({ isActive }) =>
+                isActive ? classes.active : undefined
+              }
+              onClick={() => {
+                setMenuOpen(false);
+              }}
+            >
+              BLOG
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to='/about'
+              className={({ isActive }) =>
+                isActive ? classes.active : undefined
+              }
+              onClick={() => {
+                setMenuOpen(false);
+              }}
+            >
+              ABOUT
+            </NavLink>
+          </li>
 
-              <NavLink
-                to='/signup'
-                onClick={() => {
-                  setMenuOpen(false);
-                }}
-              >
-                <button>BECOME A MEMBER</button>
-              </NavLink>
-            </>
-          )}
-        </li>
-      </ul>
-    </nav>
+          <li className={classes['nav-button']}>
+            {currentUser && (
+              <li>
+                <NavLink to='/write' onClick={() => setMenuOpen(false)}>
+                  WRITE
+                </NavLink>
+              </li>
+            )}
+            {currentUser && (
+              <li className={classes.username}>
+                Welcome <br /> {currentUser?.details?.username}
+              </li>
+            )}
+            {currentUser ? (
+              <button onClick={logout}>Logout</button>
+            ) : (
+              <>
+                <NavLink
+                  to='/login'
+                  className={classes.link}
+                  onClick={() => {
+                    setMenuOpen(false);
+                  }}
+                >
+                  <button>Login</button>
+                </NavLink>
+
+                <NavLink
+                  to='/signup'
+                  onClick={() => {
+                    setMenuOpen(false);
+                  }}
+                >
+                  <button>BECOME A MEMBER</button>
+                </NavLink>
+              </>
+            )}
+          </li>
+        </ul>
+      </nav>
+    </div>
   );
 };
 

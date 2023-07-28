@@ -1,32 +1,42 @@
 @import '../styles/variables';
 
-h2 {
+.available {
   display: flex;
   justify-content: center;
-  margin: 50px 0 50px 0;
+  margin: 100px 0 0 0;
 }
 
-table {
-  border: 2px solid $secondary-color;
-  border-collapse: collapse;
-  text-align: center;
-  width: 100%;
-  margin: 0%;
+.class-table {
+  width: 900px;
+  margin: 100px auto 100px auto;
+  table {
+    border-collapse: collapse;
+    text-align: center;
+    width: 100%;
+    margin: 0%;
 
-  td {
-    padding: 2.5rem;
-    color: $font-color;
+    td {
+      padding: 2.5rem;
+      color: $font-color;
 
-    th {
+      th {
+        background-color: black;
+      }
+    }
+
+    tr:nth-of-type(odd) {
+      background-color: $background-color;
+    }
+
+    tr:nth-of-type(even) {
       background-color: black;
     }
   }
+}
 
-  tr:nth-of-type(odd) {
-    background-color: $background-color;
-  }
-
-  tr:nth-of-type(even) {
-    background-color: black;
+@media (max-width: 600px) {
+  .class-table {
+    width: auto;
+    margin: 30px;
   }
 }

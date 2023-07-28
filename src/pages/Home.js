@@ -9,8 +9,9 @@ const HomePage = () => {
         <Newsletter />
       </div>
       <div className={classes.welcome}>
-        <h2>Welcome to</h2>
-        <h1>HIGH STREET GYM</h1>
+        <h1>WELCOME TO HIGH STREET GYM</h1>
+        <p>TRANSFORM YOUR BODY, ELEVATE YOUR MIND -</p>
+        <p> UNLEASH YOUR PONTENTIAL AT OUR GYM</p>
       </div>
     </>
   );

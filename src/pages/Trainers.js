@@ -48,7 +48,7 @@ const TrainersPage = () => {
           state={{ data: state.zumbaData }}
           className={classes['gym-class']}
         >
-          Zumba
+          ZUMBA
         </Link>
 
         <Link
@@ -63,35 +63,35 @@ const TrainersPage = () => {
           state={{ data: state.yogaData }}
           className={classes['gym-class']}
         >
-          Yoga
+          YOGA
         </Link>
         <Link
           to='trainers-pilates'
           state={{ data: state.pilatesData }}
           className={classes['gym-class']}
         >
-          Pilates
+          PILATES
         </Link>
         <Link
           to='trainers-boxing'
           state={{ data: state.boxingData }}
           className={classes['gym-class']}
         >
-          Boxing
+          BOXING
         </Link>
         <Link
           to='trainers-indoor-cycling'
           state={{ data: state.indoorCyclingData }}
           className={classes['gym-class']}
         >
-          Indoor Cycling
+          INDOOR CYCLING{' '}
         </Link>
         <Link
           to='trainers-abs'
           state={{ data: state.absData }}
           className={classes['gym-class']}
         >
-          Abs
+          ABS
         </Link>
       </div>
     </>

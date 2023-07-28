@@ -1,9 +1,27 @@
+@import '../styles/variables';
+
 .about {
-  padding: 100px;
+  width: 800px;
+  margin: auto;
+  padding-top: 200px;
+
+  .wrapper {
+    background-color: $background-color;
+    padding: 50px;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  p {
+    line-height: 40px;
+  }
 }
 
 @media (max-width: 600px) {
   .about {
-    padding: 50px;
+    width: auto;
+    margin: 20px;
   }
 }

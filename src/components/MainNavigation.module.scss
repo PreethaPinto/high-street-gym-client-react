@@ -7,7 +7,8 @@ nav {
   align-items: center;
   color: $secondary-color;
   padding: 0 50px;
-  background-color: rgba(0, 0, 0);
+  border-bottom: 1px solid $primary-color;
+  height: 80px;
 
   .logo {
     font-weight: 700;
@@ -32,7 +33,7 @@ nav {
 
     a {
       text-decoration: none;
-      color: $secondary-color;
+      color: $font-color;
       cursor: pointer;
       margin: 0 10px;
     }
@@ -76,53 +77,65 @@ nav {
 }
 
 @media (max-width: 600px) {
-  nav {
-    flex-direction: column;
-    align-items: start;
+  .wrapper {
+    background-color: rgba(0, 0, 0);
 
-    .nav-button {
-      display: flex;
+    nav {
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+      align-items: start;
+      background-color: black;
+      height: auto;
 
-    .logo-name {
-      display: none;
-    }
-
-    .logo-initials {
-      display: block;
-    }
-
-    .burger {
-      display: flex;
-      color: $primary-color;
-    }
-
-    ul {
-      display: none;
-      flex-direction: column;
-      width: 100%;
-      margin-bottom: 0.25rem;
-
-      a,
-      button {
-        margin: 0.2rem 0.5rem;
-        align-self: center;
+      .nav-button {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
 
-      li {
-        text-align: center;
+      .logo-name {
+        display: none;
+      }
+
+      .logo-initials {
+        display: block;
+      }
+
+      .burger {
+        display: flex;
+        color: $primary-color;
+      }
+
+      ul {
+        display: none;
+        flex-direction: column;
         width: 100%;
-      }
-    }
-    ul.open {
-      display: flex;
-    }
+        margin-bottom: 0.25rem;
 
-    .btn-header {
-      text-align: center;
+        a,
+        button {
+          margin: 0.2rem 0.5rem;
+          align-self: center;
+        }
+
+        li {
+          text-align: center;
+          width: 100%;
+        }
+      }
+      ul.open {
+        display: flex;
+      }
+
+      .btn-header {
+        text-align: center;
+      }
     }
   }
+}
+.username {
+  color: $primary-color;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
 }

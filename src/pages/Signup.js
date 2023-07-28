@@ -1,12 +1,10 @@
-import { Link, Form, json, useActionData, redirect } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, Form, useActionData, redirect } from 'react-router-dom';
 import axios from 'axios';
 import classes from './RegisterSignup.module.scss';
 
 const SignupPage = () => {
-  //const [errors, setErrors] = useState([]);
   const errors = useActionData();
-  //   console.log(errors);
+  const data = useActionData();
 
   let errorMessages = [];
 
@@ -16,14 +14,6 @@ const SignupPage = () => {
       path: errors[key].path,
     });
   }
-
-  // console.log(errorMessages);
-
-  // const errorMsg = errorMessages.map((err) => (
-  //   <li style={{ color: 'red' }}>{err}</li>
-  // ));
-
-  // console.log(errorMsg);
 
   return (
     <div className={classes.container}>

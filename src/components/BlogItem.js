@@ -3,7 +3,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 
-import BlogMenu from './BlogMenu';
 import moment from 'moment';
 import Edit from '../assets/edit.png';
 import Delete from '../assets/delete.png';
@@ -11,7 +10,6 @@ import classes from './BlogItem.module.scss';
 
 const BlogItem = () => {
   const [blog, setBlog] = useState({});
-  console.log(blog);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -56,7 +54,9 @@ const BlogItem = () => {
     <>
       <div className={classes.single}>
         <div className={classes['single-blog']}>
-          <img src={blog.blog_image} style={{ width: '500px' }} alt='' />
+          <div className={classes.image}>
+            <img src={`../upload/${blog?.blog_image}`} alt='' />
+          </div>
           <div className={classes.member}>
             {/* <img
               src='https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80'
@@ -78,7 +78,6 @@ const BlogItem = () => {
           <h1>{blog.blog_title}</h1>
           <p>{blog.blog_content}</p>
         </div>
-        <BlogMenu />
       </div>
     </>
   );

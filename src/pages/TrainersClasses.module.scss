@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid $secondary-color;
+  background-color: $background-color;
   border-radius: 10px;
   height: 150px;
   width: 600px;
@@ -25,12 +25,17 @@
     width: 70px;
     align-self: center;
     cursor: pointer;
+
+    &:hover {
+      background-color: $primary-color;
+      color: $font-color;
+    }
   }
 }
 
 .toast-message {
   background: orangered;
-  color: #fff;
+  color: $font-color;
 }
 
 .back {
@@ -39,6 +44,10 @@
   margin-top: 50px;
   color: $primary-color;
   font-size: 18px;
+
+  &:hover {
+    color: $font-color;
+  }
 }
 
 @media (max-width: 600px) {
