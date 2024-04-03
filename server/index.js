@@ -57,16 +57,7 @@ app.post('/upload', upload.single('file'), function (req, res) {
   res.status(200).json(file.filename);
 });
 
-// const sqlConfig = {
-//   username: 'sa',
-//   password: '1234',
-//   server: 'localhost\\SQLEXPRESS',
-//   database: 'high_street_gym',
-//   driver: 'msnodesqlv8',
-//   options: {
-//     trustedConnection: true,
-//   },
-// };
+
 
 app.post('/upload', upload.single('file'), function (req, res) {
   const file = req.file;
